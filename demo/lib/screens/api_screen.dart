@@ -5,6 +5,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:dio/dio.dart';
 
 class ApiScreen extends StatefulWidget {
+  const ApiScreen({super.key});
+
   @override
   _ApiScreenState createState() => _ApiScreenState();
 }
@@ -73,14 +75,14 @@ class _ApiScreenState extends State<ApiScreen> {
               Padding(
                 padding: EdgeInsets.all(16.w),
                 child: Text(
-                  'Posts (\${_posts.length})',
+                  'Posts (${_posts.length})',
                   style: AppTextThemes.heading6(),
                 ),
               ),
               ListView.separated(
                 shrinkWrap: true,
                 physics: NeverScrollableScrollPhysics(),
-                itemCount: _posts.length.clamp(0, 10), // Limit to 10 posts
+                itemCount: _posts.length.clamp(0, 10),
                 separatorBuilder: (context, index) => Divider(),
                 itemBuilder: (context, index) {
                   final post = _posts[index];
@@ -179,7 +181,7 @@ class _ApiScreenState extends State<ApiScreen> {
       });
 
       Toast.show(
-        message: 'Successfully loaded \${_posts.length} posts',
+        message: 'Successfully loaded ${_posts.length} posts',
         type: ToastType.success,
       );
     } catch (e) {
@@ -209,8 +211,6 @@ class _ApiScreenState extends State<ApiScreen> {
         message: 'Post created with ID: ${response['id']}',
         type: ToastType.success,
       );
-
-      // Add to the beginning of the posts list
       setState(() {
         _posts.insert(0, response);
       });
@@ -225,7 +225,7 @@ class _ApiScreenState extends State<ApiScreen> {
   Future<void> _updatePost(int id) async {
     try {
       final response = await _apiService.put(
-        endpoint: '/posts/\$id',
+        endpoint: '/posts/$id',
         body: {
           'id': id,
           'title': 'Updated Post',
@@ -239,8 +239,6 @@ class _ApiScreenState extends State<ApiScreen> {
         message: 'Post updated successfully',
         type: ToastType.success,
       );
-
-      // Update the selected post
       setState(() {
         _selectedPost = response;
       });
@@ -255,15 +253,13 @@ class _ApiScreenState extends State<ApiScreen> {
   Future<void> _deletePost(int id) async {
     try {
       await _apiService.delete(
-        endpoint: '/posts/\$id',
+        endpoint: '/posts/$id',
       );
 
       Toast.show(
         message: 'Post deleted successfully',
         type: ToastType.success,
       );
-
-      // Remove the post from the list and clear selection
       setState(() {
         _posts.removeWhere((post) => post['id'] == id);
         _selectedPost = null;
