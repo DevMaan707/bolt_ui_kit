@@ -1,6 +1,7 @@
 // lib/main.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_kit/flutter_kit.dart';
+import 'package:get/get.dart';
 import 'screens/home_screen.dart';
 
 void main() async {
@@ -20,7 +21,7 @@ class DemoApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FlutterKit.builder(
-      builder: () => MaterialApp(
+      builder: () => GetMaterialApp(
         title: 'Flutter Kit Demo',
         theme: AppTheme.lightTheme(),
         darkTheme: AppTheme.darkTheme(),

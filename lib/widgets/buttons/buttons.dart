@@ -42,24 +42,20 @@ class Button extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // If disabled, create a muted style
     final isDisabled = onPressed == null;
     final buttonStyle = _getButtonStyle(context);
     final buttonSize = _getButtonSize();
-    final buttonPadding = padding ?? _getDefaultPadding();
     final buttonContent = _buildContent(context);
 
     return SizedBox(
       width: width,
       height: height ?? buttonSize,
-      child:
-          _buildButton(buttonStyle, buttonPadding, buttonContent, isDisabled),
+      child: _buildButton(buttonStyle, buttonContent, isDisabled),
     );
   }
 
   Widget _buildButton(
     ButtonStyle buttonStyle,
-    EdgeInsetsGeometry buttonPadding,
     Widget buttonContent,
     bool isDisabled,
   ) {
@@ -69,30 +65,21 @@ class Button extends StatelessWidget {
         return ElevatedButton(
           onPressed: isLoading ? null : onPressed,
           style: buttonStyle,
-          child: Padding(
-            padding: buttonPadding,
-            child: buttonContent,
-          ),
+          child: buttonContent,
         );
 
       case ButtonType.secondary:
         return ElevatedButton(
           onPressed: isLoading ? null : onPressed,
           style: buttonStyle,
-          child: Padding(
-            padding: buttonPadding,
-            child: buttonContent,
-          ),
+          child: buttonContent,
         );
 
       case ButtonType.outlined:
         return OutlinedButton(
           onPressed: isLoading ? null : onPressed,
           style: buttonStyle,
-          child: Padding(
-            padding: buttonPadding,
-            child: buttonContent,
-          ),
+          child: buttonContent,
         );
 
       case ButtonType.text:
@@ -106,12 +93,14 @@ class Button extends StatelessWidget {
 
   Widget _buildContent(BuildContext context) {
     if (isLoading) {
-      return SizedBox(
-        height: 20.h,
-        width: 20.h,
-        child: CircularProgressIndicator(
-          strokeWidth: 2.5,
-          valueColor: AlwaysStoppedAnimation<Color>(_getProgressColor()),
+      return Center(
+        child: SizedBox(
+          height: 20.h,
+          width: 20.h,
+          child: CircularProgressIndicator(
+            strokeWidth: 2.5,
+            valueColor: AlwaysStoppedAnimation<Color>(_getProgressColor()),
+          ),
         ),
       );
     }
@@ -120,83 +109,127 @@ class Button extends StatelessWidget {
       return customChild!;
     }
 
+    final btnPadding = padding ?? _getDefaultPadding();
+
     if (icon == null) {
-      return Text(
-        text,
-        style: _getTextStyle(context),
-        textAlign: TextAlign.center,
+      return Padding(
+        padding: btnPadding,
+        child: Text(
+          text,
+          style: _getTextStyle(context),
+          textAlign: TextAlign.center,
+          overflow: TextOverflow.ellipsis,
+          maxLines: 1,
+        ),
       );
     }
 
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        if (!iconRight) ...[
-          Icon(
-            icon,
-            size: _getIconSize(),
-            color: _getTextColor(context),
+    return Padding(
+      padding: btnPadding,
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          if (!iconRight) ...[
+            Icon(
+              icon,
+              size: _getIconSize(),
+              color: _getTextColor(context),
+            ),
+            SizedBox(width: 8.w),
+          ],
+          Flexible(
+            child: Text(
+              text,
+              style: _getTextStyle(context),
+              overflow: TextOverflow.ellipsis,
+              textAlign: TextAlign.center,
+              maxLines: 1,
+            ),
           ),
-          SizedBox(width: 8.w),
+          if (iconRight) ...[
+            SizedBox(width: 8.w),
+            Icon(
+              icon,
+              size: _getIconSize(),
+              color: _getTextColor(context),
+            ),
+          ],
         ],
-        Text(
-          text,
-          style: _getTextStyle(context),
-        ),
-        if (iconRight) ...[
-          SizedBox(width: 8.w),
-          Icon(
-            icon,
-            size: _getIconSize(),
-            color: _getTextColor(context),
-          ),
-        ],
-      ],
+      ),
     );
   }
 
   ButtonStyle _getButtonStyle(BuildContext context) {
     final borderRad = borderRadius ?? BorderRadius.circular(8.r);
 
+    // Base styles with appropriate padding
+    ButtonStyle baseStyle = ButtonStyle(
+      padding: MaterialStateProperty.all(
+          EdgeInsets.zero), // Remove default button padding
+      minimumSize: MaterialStateProperty.all(Size(0, _getButtonSize())),
+      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+    );
+
     switch (type) {
       case ButtonType.primary:
-        return ElevatedButton.styleFrom(
-          backgroundColor: backgroundColor ?? AppColors.primary,
-          foregroundColor: textColor ?? Colors.white,
-          shape: RoundedRectangleBorder(borderRadius: borderRad),
-          elevation: 1,
+        return baseStyle.copyWith(
+          backgroundColor: MaterialStateProperty.resolveWith((states) {
+            if (states.contains(MaterialState.disabled)) {
+              return (backgroundColor ?? AppColors.primary).withOpacity(0.6);
+            }
+            return backgroundColor ?? AppColors.primary;
+          }),
+          foregroundColor: MaterialStateProperty.all(textColor ?? Colors.white),
+          shape: MaterialStateProperty.all(RoundedRectangleBorder(
+            borderRadius: borderRad,
+          )),
+          elevation: MaterialStateProperty.all(1),
         );
 
       case ButtonType.secondary:
         final secondaryColor = AppColors.accent;
-        return ElevatedButton.styleFrom(
-          backgroundColor: backgroundColor ?? secondaryColor,
-          foregroundColor: textColor ?? Colors.white,
-          shape: RoundedRectangleBorder(borderRadius: borderRad),
-          elevation: 1,
+        return baseStyle.copyWith(
+          backgroundColor: MaterialStateProperty.resolveWith((states) {
+            if (states.contains(MaterialState.disabled)) {
+              return (backgroundColor ?? secondaryColor).withOpacity(0.6);
+            }
+            return backgroundColor ?? secondaryColor;
+          }),
+          foregroundColor: MaterialStateProperty.all(textColor ?? Colors.white),
+          shape: MaterialStateProperty.all(RoundedRectangleBorder(
+            borderRadius: borderRad,
+          )),
+          elevation: MaterialStateProperty.all(1),
         );
 
       case ButtonType.outlined:
         final outlineColor = backgroundColor ?? AppColors.primary;
-        return OutlinedButton.styleFrom(
-          foregroundColor: textColor ?? outlineColor,
-          shape: RoundedRectangleBorder(borderRadius: borderRad),
-          side: BorderSide(color: outlineColor),
+        return baseStyle.copyWith(
+          foregroundColor: MaterialStateProperty.all(textColor ?? outlineColor),
+          shape: MaterialStateProperty.all(RoundedRectangleBorder(
+            borderRadius: borderRad,
+          )),
+          side: MaterialStateProperty.all(BorderSide(color: outlineColor)),
         );
 
       case ButtonType.text:
-        return TextButton.styleFrom(
-          foregroundColor: textColor ?? AppColors.primary,
-          shape: RoundedRectangleBorder(borderRadius: borderRad),
+        return baseStyle.copyWith(
+          foregroundColor:
+              MaterialStateProperty.all(textColor ?? AppColors.primary),
+          shape: MaterialStateProperty.all(RoundedRectangleBorder(
+            borderRadius: borderRad,
+          )),
         );
 
       case ButtonType.custom:
-        return ElevatedButton.styleFrom(
-          backgroundColor: backgroundColor,
-          foregroundColor: textColor,
-          shape: RoundedRectangleBorder(borderRadius: borderRad),
-          elevation: 1,
+        return baseStyle.copyWith(
+          backgroundColor: MaterialStateProperty.all(backgroundColor),
+          foregroundColor: MaterialStateProperty.all(textColor),
+          shape: MaterialStateProperty.all(RoundedRectangleBorder(
+            borderRadius: borderRad,
+          )),
+          elevation: MaterialStateProperty.all(1),
         );
     }
   }
@@ -230,7 +263,7 @@ class Button extends StatelessWidget {
   double _getIconSize() {
     switch (size) {
       case ButtonSize.small:
-        return 14.sp;
+        return 16.sp;
       case ButtonSize.medium:
         return 18.sp;
       case ButtonSize.large:
@@ -242,13 +275,14 @@ class Button extends StatelessWidget {
 
   TextStyle _getTextStyle(BuildContext context) {
     final defaultSize = size == ButtonSize.small
-        ? 12.sp
+        ? 13.sp
         : (size == ButtonSize.large ? 16.sp : 14.sp);
 
     return TextStyle(
       fontSize: defaultSize,
       fontWeight: FontWeight.w600,
       color: _getTextColor(context),
+      height: 1.2, // Improve vertical alignment
     );
   }
 
