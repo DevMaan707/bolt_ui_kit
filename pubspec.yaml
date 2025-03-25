@@ -1,0 +1,28 @@
+name: flutter_kit
+description: "A new Flutter package project."
+version: 0.6.8
+
+environment:
+  sdk: ^3.5.4
+  flutter: ">=1.17.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  get:
+  dio:
+  logger:
+  shared_preferences:
+  pinput:
+  flutter_screenutil:
+  fl_chart:
+  carousel_slider:
+  url_launcher:
+  google_fonts:
+  uuid:
+  file_picker:
+  get_storage:
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
