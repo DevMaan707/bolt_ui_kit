@@ -22,7 +22,7 @@ Add Flutter Kit to your project by including it in your `pubspec.yaml`:
 dependencies:
   flutter_kit:
     git:
-      url: https://github.com/yourusername/flutter_kit.git
+      url: https://github.com/DevMaan707/flutter_kit.git
       ref: main
 ```
 
@@ -498,4 +498,4 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ---
 
-For more detailed information and examples, check out the [documentation](https://github.com/yourusername/flutter_kit/wiki).
+For more detailed information and examples, check out the [documentation](https://github.com/DevMaan707/flutter_kit/wiki).
