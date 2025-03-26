@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:file_picker/file_picker.dart' as fp;
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
+
 import 'package:permission_handler/permission_handler.dart';
 import '../theme/app_colors.dart';
 import 'permission_handler.dart';

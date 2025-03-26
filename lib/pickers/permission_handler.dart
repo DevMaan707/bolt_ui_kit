@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:get/get.dart';
-import '../components/toast/toast.dart';
 import '../theme/app_colors.dart';
 import '../widgets/buttons/buttons.dart';
 

@@ -107,7 +107,6 @@ class ImagePickerUtil {
       print('Error picking multiple images: $e');
       return [];
     }
-    return [];
   }
 
   Future<File?> pickVideoFromCamera({
@@ -385,7 +384,7 @@ class CropSettings {
     Color backgroundColor = Colors.black,
   }) {
     return CropSettings(
-      aspectRatio: CropAspectRatio(ratioX: 1.0, ratioY: 1.0),
+      aspectRatio: const CropAspectRatio(ratioX: 1.0, ratioY: 1.0),
       cropStyle: CropStyle.rectangle,
       compressQuality: compressQuality,
       initAspectRatio: CropAspectRatioPreset.square,
@@ -400,7 +399,7 @@ class CropSettings {
     Color backgroundColor = Colors.black,
   }) {
     return CropSettings(
-      aspectRatio: CropAspectRatio(ratioX: 1.0, ratioY: 1.0),
+      aspectRatio: const CropAspectRatio(ratioX: 1.0, ratioY: 1.0),
       cropStyle: CropStyle.circle,
       compressQuality: compressQuality,
       initAspectRatio: CropAspectRatioPreset.square,
@@ -416,7 +415,7 @@ class CropSettings {
     Color backgroundColor = Colors.black,
   }) {
     return CropSettings(
-      aspectRatio: CropAspectRatio(ratioX: 16.0, ratioY: 9.0),
+      aspectRatio: const CropAspectRatio(ratioX: 16.0, ratioY: 9.0),
       cropStyle: CropStyle.rectangle,
       compressQuality: compressQuality,
       initAspectRatio: CropAspectRatioPreset.ratio16x9,

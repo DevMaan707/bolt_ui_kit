@@ -25,7 +25,7 @@ class AppLayout extends StatelessWidget {
   final bool safeRight;
 
   const AppLayout({
-    Key? key,
+    super.key,
     this.type = AppLayoutType.standard,
     required this.child,
     this.backgroundColor,
@@ -45,7 +45,7 @@ class AppLayout extends StatelessWidget {
     this.safeBottom = true,
     this.safeLeft = true,
     this.safeRight = true,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -91,7 +91,7 @@ class AppLayout extends StatelessWidget {
     }
     if (type == AppLayoutType.scroll) {
       content = SingleChildScrollView(
-        physics: physics ?? BouncingScrollPhysics(),
+        physics: physics ?? const BouncingScrollPhysics(),
         child: content,
       );
     }
