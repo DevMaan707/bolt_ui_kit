@@ -6,11 +6,9 @@ import 'screens/home_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
-  // Initialize FlutterKit with your brand colors
   await FlutterKit.initialize(
-    primaryColor: Color(0xFF6200EE), // Purple
-    accentColor: Color(0xFF03DAC5), // Teal
+    primaryColor: Color(0xFF6200EE),
+    accentColor: Color(0xFF03DAC5),
     fontFamily: 'Poppins',
   );
 

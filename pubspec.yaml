@@ -1,6 +1,10 @@
 name: flutter_kit
-description: "A new Flutter package project."
-version: 0.6.8
+description: A comprehensive Flutter UI kit with pre-built components, themes, and utilities for rapid application development. Includes customizable buttons, forms, cards, and more.
+version: 1.0.0
+homepage: https://github.com/DevMaan707/flutter_kit
+repository: https://github.com/DevMaan707/flutter_kit
+issue_tracker: https://github.com/DevMaan707/flutter_kit/issues
+documentation: https://github.com/DevMaan707/flutter_kit/wiki
 
 environment:
   sdk: ^3.5.4
@@ -9,20 +13,55 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  get:
-  dio:
-  logger:
-  shared_preferences:
-  pinput:
-  flutter_screenutil:
-  fl_chart:
-  carousel_slider:
-  url_launcher:
-  google_fonts:
-  uuid:
-  file_picker:
-  get_storage:
+  get: ^4.7.2
+  dio: ^5.8.0+1
+  logger: ^2.5.0
+  shared_preferences: ^2.5.2
+  pinput: ^5.0.1
+  flutter_screenutil: ^5.9.3
+  fl_chart: ^0.70.2
+  carousel_slider: ^5.0.0
+  url_launcher: ^6.3.1
+  google_fonts: ^6.2.1
+  ulid: ^2.0.1
+  file_picker: ^9.2.2
+  get_storage: ^2.1.1
+  permission_handler: ^11.4.0
+  intl: ^0.20.2
+  image_picker: ^1.1.2
+  image_cropper: ^9.0.0
+  mobile_scanner: ^6.0.7
+  table_calendar: ^3.2.0
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^4.0.0
+
+screenshots:
+  - description: "Example of buttons "
+    path: screenshots/1.jpg
+  - description: "Example of cards "
+    path: screenshots/2.jpg
+  - description: "Example of forms and inputs"
+    path: screenshots/3.jpg
+  - description: "Example of pickers "
+    path: screenshots/4.jpg
+  - description: "Example of pie chart"
+    path: screenshots/5.jpg
+  - description: "Example of bar chart "
+    path: screenshots/6.jpg
+  - description: "Example of donut chart "
+    path: screenshots/7.jpg
+  - description: "Example of line chart "
+    path: screenshots/8.jpg
+  - description: "Example of toasts "
+    path: screenshots/12.jpg
+  - description: "Example of themes "
+    path: screenshots/13.jpg
+
+topics:
+  - ui-kit
+  - components
+  - widgets
+  - theme
+  - design-system

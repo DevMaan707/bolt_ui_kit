@@ -49,7 +49,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FlutterKit.builder(
-      builder: () => MaterialApp(
+      builder: () => GetMaterialApp(
         title: 'My App',
         theme: AppTheme.lightTheme(),
         darkTheme: AppTheme.darkTheme(),
@@ -176,7 +176,110 @@ Toast.show(
   dismissible: false,
 )
 ```
+## Pickers & Selectors
 
+Flutter Kit includes beautiful, customizable pickers that follow your app's theme for consistent UI:
+
+### Date & Time Pickers
+
+```dart
+// Date picker with theme-consistent styling
+final date = await DatePickerUtil.showCustomDatePicker(
+  initialDate: DateTime.now(),
+  firstDate: DateTime(2000),
+  lastDate: DateTime(2100),
+  helpText: 'Select Date',
+  confirmText: 'Choose',
+  cancelText: 'Cancel',
+);
+
+// Date range picker
+final dateRange = await DatePickerUtil.showCustomDateRangePicker(
+  initialDateRange: DateTimeRange(
+    start: DateTime.now(),
+    end: DateTime.now().add(Duration(days: 7)),
+  ),
+  helpText: 'Select Date Range',
+);
+
+// Time picker with themed UI
+final time = await TimePickerUtil.showCustomTimePicker(
+  initialTime: TimeOfDay.now(),
+  helpText: 'Select Time',
+  use24HourFormat: false,
+);
+
+// Duration picker
+final duration = await TimePickerUtil.showDurationPicker(
+  initialDuration: Duration(minutes: 30),
+  showHours: true,
+  showMinutes: true,
+  showSeconds: true,
+);
+```
+
+### Calendar Picker
+
+```dart
+// Single date selection
+final result = await CalendarPickerUtil.showCalendarPicker(
+  mode: CalendarPickerMode.single,
+  primaryColor: AppColors.primary,
+  selectedColor: AppColors.accent,
+  title: 'Select Date',
+);
+
+// Multiple dates selection
+final result = await CalendarPickerUtil.showCalendarPicker(
+  mode: CalendarPickerMode.multi,
+  initialSelectedDates: [DateTime.now()],
+  title: 'Select Multiple Dates',
+);
+
+// Date range selection
+final result = await CalendarPickerUtil.showCalendarPicker(
+  mode: CalendarPickerMode.range,
+  title: 'Select Date Range',
+);
+```
+
+### File & Media Pickers
+
+```dart
+// Image picker with beautiful UI
+final image = await ImagePickerUtil().showCustomImagePicker(
+  enableCrop: true,
+  cropSettings: CropSettings.square(
+    primaryColor: AppColors.primary,
+  ),
+);
+
+// File picker with custom UI
+final file = await FilePickerUtil().showCustomFilePicker(
+  context: context,
+  title: 'Select File',
+  primaryColor: AppColors.primary,
+);
+
+// QR Scanner with animated UI
+final result = await QRScannerUtil().scanQR(
+  title: 'Scan QR Code',
+  scanInstructions: 'Position the QR code within the frame',
+  primaryColor: AppColors.primary,
+);
+```
+
+### Simplified Access
+
+```dart
+// Quick access through the AppPickers utility class
+final date = await AppPickers.pickDate();
+final time = await AppPickers.pickTime();
+final image = await AppPickers.pickImageWithDialog();
+final qrCode = await AppPickers.scanQR();
+final dateRange = await AppPickers.pickDateRange();
+final dates = await AppPickers.pickMultipleDates();
+```
 ### Input Forms
 
 ```dart

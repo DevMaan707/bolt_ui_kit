@@ -22,7 +22,7 @@ class ChartsScreen extends StatelessWidget {
             SizedBox(height: 16.h),
             AppCard(
               child: SizedBox(
-                height: 200.h,
+                height: 400.h,
                 child: AppChart(
                   type: AppChartType.pie,
                   title: 'Revenue By Product',
@@ -35,7 +35,7 @@ class ChartsScreen extends StatelessWidget {
             SizedBox(height: 16.h),
             AppCard(
               child: SizedBox(
-                height: 200.h,
+                height: 400.h,
                 child: AppChart(
                   type: AppChartType.bar,
                   title: 'Monthly Sales',
@@ -48,7 +48,7 @@ class ChartsScreen extends StatelessWidget {
             SizedBox(height: 16.h),
             AppCard(
               child: SizedBox(
-                height: 200.h,
+                height: 400.h,
                 child: AppChart(
                   type: AppChartType.donut,
                   title: 'Traffic Sources',
@@ -61,7 +61,7 @@ class ChartsScreen extends StatelessWidget {
             SizedBox(height: 16.h),
             AppCard(
               child: SizedBox(
-                height: 200.h,
+                height: 400.h,
                 child: AppChart(
                   type: AppChartType.line,
                   title: 'User Growth',

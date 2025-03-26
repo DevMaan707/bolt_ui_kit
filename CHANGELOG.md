@@ -1,95 +1,94 @@
-## [0.1.0] - 2024-12-28
-### Added
-- Initial release of the package with navbar, login, OTP, and register workflows.
+# CHANGELOG.md
 
-## [0.2.0] - 2024-12-28
-### Added
-- Added generic controller and generic service.
+## 0.1.0 - 2025-03-25
 
-## [0.3.0] - 2024-12-28
-### Added
-- Added Custom Theme.
+### Initial Release
 
-## [0.4.0] - 2024-12-28
-### Added
-- Added Custom Fonts support.
+- Initial release of Flutter Kit, a comprehensive UI toolkit for Flutter applications.
+- Core components and services for rapid application development.
 
-## [0.4.1] - 2024-12-29
-### Added
-- Added more font styles.
+## 0.2.0 - 2025-03-25
 
-## [0.5.0] - 2024-12-29
 ### Added
-- Added Splash screen.
 
-## [0.5.1] - 2024-12-29
-### Added
-- Added initialize code.
+- `ApiService`: HTTP client with interceptors, logging, and error handling
+- `Toast`: Customizable toast notifications with multiple types
+- `Navbar`: Flexible navigation bar with various styles
+- Basic theming system with `AppColors` and `AppTheme`
 
-## [0.5.2] - 2024-12-29
-### Added
-- Changed Class name.
-
-## [0.5.3] - 2024-12-29
-### Added
-- added drop down widget
-
-## [0.5.4] - 2024-12-29
-### Added
-- changed login andregister controller implementation
-- added custom elevated buttons and textfields
-
-## [0.5.5] - 2024-12-29
-### Added
-- added banner and chart components
-
-## [0.5.6] - 2024-12-29
-### Added
-- enhanced banner , chart components , added padding to the dropdown widget, did some theme changes , fixed elevatedbutton and textfield custom implementations
-
-## [0.5.7] - 2024-12-29
 ### Fixed
-- fixed Generic controller and generic service and tested
 
-## [0.5.8] - 2024-12-29
-### Added
-- added pinput widget
+- Minor layout issues in responsive designs
 
-## [0.5.9] - 2024-12-29
-### Added
-- added bottomsheet for otp entering with pinput
-- added navigation service
-- moved the pinput implementation from the custom theme and made it a component
+## 0.3.0 - 2025-03-25
 
-## [0.6.0] - 2025-1-1
 ### Added
-- added color, border radius parameters for drop down widget
-- added reactive bool for controlling isLoading in customelevatedbuttons
+
+- Complete theming system with light and dark mode support
+- Text themes with Google Fonts integration
+- Buttons and input components with multiple variants
+- Card and layout widgets
+- Storage service for local data persistence
+- Navigator service for simplified navigation
+
+### Changed
+
+- Improved responsiveness with ScreenUtil integration
+- Enhanced error handling in ApiService
+
+## 0.4.0 - 2025-03-26
+
+### Added
+
+- Form components with validation
+- Chart widgets for data visualization
+- Authentication service
+- Logging utility for better debugging
+
 ### Fixed
-- fixed error logging in generic controller
-### Removed
-- removed login_controller and register controllers
 
-## [0.6.1] - 2025-1-1
+- Layout issues on smaller devices
+- Text overflow in buttons with icons
+
+## 0.5.0 - 2025-03-26
+
 ### Added
-- API logs
 
-## [0.6.2] - 2025-1-1
-### Added
-- API logs
+- Permission management system
+- Date and time pickers with customizable UI
+- File picker utilities
+- Image and video picker with cropping functionality
+- QR code scanner with animated UI
+- Calendar picker with multiple selection modes
 
-## [0.6.3] - 2025-1-2
+### Changed
+
+- Improved performance for list renderings
+- Enhanced theming capabilities with more customization options
+
 ### Fixed
-- generic controller wrapping logic
 
-## [0.6.4] - 2025-1-2
+- Memory leaks in image processing
+- Permission handling on Android 13+
+
+## 1.0.0 - 2025-03-26
+
+### Added
+
+- Beautiful chart visualizations with animations
+- Enhanced pie, bar, line and donut chart implementations
+- Theme-consistent date and time pickers
+- Improved calendar picker with better styling
+- Example screens for all picker components
+
+### Changed
+
+- Date picker now uses theme colors consistently
+- Time picker design improved to match app theme
+- Duration picker with better visual feedback
+
 ### Fixed
-- generic controller logic
 
-## [0.6.7] - 2025-1-2
-### Added
-- reactive text to otp bottom modal
-
-## [0.6.8] - 2025-1-2
-### Added
-- clearStack parameter to navigator
+- Inconsistencies in date picker theming
+- Time picker bugs with theme colors
+- Various minor UI issues in pickers

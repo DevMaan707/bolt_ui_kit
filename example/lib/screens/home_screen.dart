@@ -8,6 +8,7 @@ import 'cards_screen.dart';
 import 'forms_screen.dart';
 import 'charts_screen.dart';
 import 'layouts_screen.dart';
+import 'pickers_screen.dart';
 import 'toast_screen.dart';
 import 'api_screen.dart';
 
@@ -73,6 +74,12 @@ class HomeScreen extends StatelessWidget {
         'description': 'Form controls and validation',
         'icon': Icons.edit,
         'screen': FormsScreen(),
+      },
+      {
+        'title': 'Pickers',
+        'description': 'Date, time and file selectors',
+        'icon': Icons.calendar_today,
+        'screen': PickersScreen(),
       },
       {
         'title': 'Charts',

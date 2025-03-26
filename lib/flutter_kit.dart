@@ -19,6 +19,7 @@ export 'widgets/cards/cards.dart';
 export 'widgets/forms/forms.dart';
 export 'widgets/inputs/inputs.dart';
 export 'widgets/layouts/layout.dart';
+export 'pickers/pickers.dart';
 
 class FlutterKit {
   static Future<void> initialize({
