@@ -165,71 +165,71 @@ class Button extends StatelessWidget {
 
     // Base styles with appropriate padding
     ButtonStyle baseStyle = ButtonStyle(
-      padding: MaterialStateProperty.all(
+      padding: WidgetStateProperty.all(
           EdgeInsets.zero), // Remove default button padding
-      minimumSize: MaterialStateProperty.all(Size(0, _getButtonSize())),
+      minimumSize: WidgetStateProperty.all(Size(0, _getButtonSize())),
       tapTargetSize: MaterialTapTargetSize.shrinkWrap,
     );
 
     switch (type) {
       case ButtonType.primary:
         return baseStyle.copyWith(
-          backgroundColor: MaterialStateProperty.resolveWith((states) {
-            if (states.contains(MaterialState.disabled)) {
+          backgroundColor: WidgetStateProperty.resolveWith((states) {
+            if (states.contains(WidgetState.disabled)) {
               return (backgroundColor ?? AppColors.primary).withOpacity(0.6);
             }
             return backgroundColor ?? AppColors.primary;
           }),
-          foregroundColor: MaterialStateProperty.all(textColor ?? Colors.white),
-          shape: MaterialStateProperty.all(RoundedRectangleBorder(
+          foregroundColor: WidgetStateProperty.all(textColor ?? Colors.white),
+          shape: WidgetStateProperty.all(RoundedRectangleBorder(
             borderRadius: borderRad,
           )),
-          elevation: MaterialStateProperty.all(1),
+          elevation: WidgetStateProperty.all(1),
         );
 
       case ButtonType.secondary:
         final secondaryColor = AppColors.accent;
         return baseStyle.copyWith(
-          backgroundColor: MaterialStateProperty.resolveWith((states) {
-            if (states.contains(MaterialState.disabled)) {
+          backgroundColor: WidgetStateProperty.resolveWith((states) {
+            if (states.contains(WidgetState.disabled)) {
               return (backgroundColor ?? secondaryColor).withOpacity(0.6);
             }
             return backgroundColor ?? secondaryColor;
           }),
-          foregroundColor: MaterialStateProperty.all(textColor ?? Colors.white),
-          shape: MaterialStateProperty.all(RoundedRectangleBorder(
+          foregroundColor: WidgetStateProperty.all(textColor ?? Colors.white),
+          shape: WidgetStateProperty.all(RoundedRectangleBorder(
             borderRadius: borderRad,
           )),
-          elevation: MaterialStateProperty.all(1),
+          elevation: WidgetStateProperty.all(1),
         );
 
       case ButtonType.outlined:
         final outlineColor = backgroundColor ?? AppColors.primary;
         return baseStyle.copyWith(
-          foregroundColor: MaterialStateProperty.all(textColor ?? outlineColor),
-          shape: MaterialStateProperty.all(RoundedRectangleBorder(
+          foregroundColor: WidgetStateProperty.all(textColor ?? outlineColor),
+          shape: WidgetStateProperty.all(RoundedRectangleBorder(
             borderRadius: borderRad,
           )),
-          side: MaterialStateProperty.all(BorderSide(color: outlineColor)),
+          side: WidgetStateProperty.all(BorderSide(color: outlineColor)),
         );
 
       case ButtonType.text:
         return baseStyle.copyWith(
           foregroundColor:
-              MaterialStateProperty.all(textColor ?? AppColors.primary),
-          shape: MaterialStateProperty.all(RoundedRectangleBorder(
+              WidgetStateProperty.all(textColor ?? AppColors.primary),
+          shape: WidgetStateProperty.all(RoundedRectangleBorder(
             borderRadius: borderRad,
           )),
         );
 
       case ButtonType.custom:
         return baseStyle.copyWith(
-          backgroundColor: MaterialStateProperty.all(backgroundColor),
-          foregroundColor: MaterialStateProperty.all(textColor),
-          shape: MaterialStateProperty.all(RoundedRectangleBorder(
+          backgroundColor: WidgetStateProperty.all(backgroundColor),
+          foregroundColor: WidgetStateProperty.all(textColor),
+          shape: WidgetStateProperty.all(RoundedRectangleBorder(
             borderRadius: borderRad,
           )),
-          elevation: MaterialStateProperty.all(1),
+          elevation: WidgetStateProperty.all(1),
         );
     }
   }

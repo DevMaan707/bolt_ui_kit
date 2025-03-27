@@ -5,10 +5,12 @@ import 'package:flutter_kit/widgets/charts/chart.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ChartsScreen extends StatelessWidget {
+  const ChartsScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: Navbar(
+      appBar: const Navbar(
         title: 'Charts',
         style: NavbarStyle.standard,
       ),

@@ -608,13 +608,13 @@
       "languageVersion": "3.3"
     },
     {
-      "name": "flutter_kit",
+      "name": "bolt_ui_kit",
       "rootUri": "../",
       "packageUri": "lib/",
       "languageVersion": "3.5"
     }
   ],
-  "generated": "2025-03-26T16:29:36.621496Z",
+  "generated": "2025-03-27T03:34:36.897884Z",
   "generator": "pub",
   "generatorVersion": "3.6.2",
   "flutterRoot": "file:///Users/aymaan/path-libraries/flutter",

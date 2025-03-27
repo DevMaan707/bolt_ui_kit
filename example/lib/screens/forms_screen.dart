@@ -4,6 +4,8 @@ import 'package:flutter_kit/flutter_kit.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class FormsScreen extends StatefulWidget {
+  const FormsScreen({super.key});
+
   @override
   _FormsScreenState createState() => _FormsScreenState();
 }

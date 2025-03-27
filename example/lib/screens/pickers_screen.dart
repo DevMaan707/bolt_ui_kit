@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_kit/components/navbar/navbar.dart';
 import 'package:flutter_kit/flutter_kit.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:get/get.dart';
 
 class PickersScreen extends StatefulWidget {
+  const PickersScreen({super.key});
+
   @override
   _PickersScreenState createState() => _PickersScreenState();
 }
@@ -23,7 +24,7 @@ class _PickersScreenState extends State<PickersScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: Navbar(
+      appBar: const Navbar(
         title: 'Pickers',
         style: NavbarStyle.standard,
       ),
@@ -319,8 +320,8 @@ class _PickersScreenState extends State<PickersScreen> {
 
   Future<void> _pickDuration() async {
     final Duration? result = await TimePickerUtil.showDurationPicker(
-      initialDuration: _selectedDuration ?? Duration(minutes: 30),
-      maxDuration: Duration(hours: 10),
+      initialDuration: _selectedDuration ?? const Duration(minutes: 30),
+      maxDuration: const Duration(hours: 10),
       primaryColor: AppColors.primary,
       backgroundColor: Theme.of(context).cardColor,
       textColor: Theme.of(context).textTheme.bodyLarge?.color,

@@ -1,10 +1,10 @@
-name: flutter_kit
+name: bolt_ui_kit
 description: A comprehensive Flutter UI kit with pre-built components, themes, and utilities for rapid application development. Includes customizable buttons, forms, cards, and more.
-version: 1.0.2
-homepage: https://github.com/DevMaan707/flutter_kit
-repository: https://github.com/DevMaan707/flutter_kit
-issue_tracker: https://github.com/DevMaan707/flutter_kit/issues
-documentation: https://github.com/DevMaan707/flutter_kit/wiki
+version: 1.0.3
+homepage: https://github.com/DevMaan707/bolt_ui_kit
+repository: https://github.com/DevMaan707/bolt_ui_kit
+issue_tracker: https://github.com/DevMaan707/bolt_ui_kit/issues
+documentation: https://github.com/DevMaan707/bolt_ui_kit/wiki
 
 environment:
   sdk: ^3.5.4

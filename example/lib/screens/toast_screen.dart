@@ -4,10 +4,12 @@ import 'package:flutter_kit/flutter_kit.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ToastScreen extends StatelessWidget {
+  const ToastScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: Navbar(
+      appBar: const Navbar(
         title: 'Toast Notifications',
         style: NavbarStyle.standard,
       ),
@@ -65,7 +67,7 @@ class ToastScreen extends StatelessWidget {
               onPressed: () => Toast.show(
                 message: 'This toast will stay for 5 seconds',
                 type: ToastType.info,
-                duration: Duration(seconds: 5),
+                duration: const Duration(seconds: 5),
               ),
               color: Colors.teal,
               icon: Icons.timer,

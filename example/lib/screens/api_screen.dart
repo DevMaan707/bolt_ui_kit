@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_kit/components/navbar/navbar.dart';
 import 'package:flutter_kit/flutter_kit.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:dio/dio.dart';
 
 class ApiScreen extends StatefulWidget {
   const ApiScreen({super.key});
@@ -21,7 +20,7 @@ class _ApiScreenState extends State<ApiScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: Navbar(
+      appBar: const Navbar(
         title: 'API Integration',
         style: NavbarStyle.standard,
       ),
@@ -81,9 +80,9 @@ class _ApiScreenState extends State<ApiScreen> {
               ),
               ListView.separated(
                 shrinkWrap: true,
-                physics: NeverScrollableScrollPhysics(),
+                physics: const NeverScrollableScrollPhysics(),
                 itemCount: _posts.length.clamp(0, 10),
-                separatorBuilder: (context, index) => Divider(),
+                separatorBuilder: (context, index) => const Divider(),
                 itemBuilder: (context, index) {
                   final post = _posts[index];
                   return ListTile(

@@ -4,10 +4,12 @@ import 'package:flutter_kit/flutter_kit.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class LayoutsScreen extends StatelessWidget {
+  const LayoutsScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: Navbar(
+      appBar: const Navbar(
         title: 'Layouts',
         style: NavbarStyle.standard,
       ),

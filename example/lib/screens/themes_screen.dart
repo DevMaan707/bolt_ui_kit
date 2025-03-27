@@ -4,12 +4,14 @@ import 'package:flutter_kit/flutter_kit.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ThemeScreen extends StatelessWidget {
+  const ThemeScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
-      appBar: Navbar(
+      appBar: const Navbar(
         title: 'Theming',
         style: NavbarStyle.standard,
       ),
@@ -130,7 +132,7 @@ class ThemeScreen extends StatelessWidget {
                       BoxShadow(
                         color: Colors.black.withOpacity(0.1),
                         blurRadius: 4,
-                        offset: Offset(0, 2),
+                        offset: const Offset(0, 2),
                       ),
                     ],
                   ),
@@ -223,7 +225,7 @@ class ThemeScreen extends StatelessWidget {
         SizedBox(height: 16.h),
         ListView.separated(
           shrinkWrap: true,
-          physics: NeverScrollableScrollPhysics(),
+          physics: const NeverScrollableScrollPhysics(),
           itemCount: fontFamilies.length,
           separatorBuilder: (context, index) => SizedBox(height: 16.h),
           itemBuilder: (context, index) {

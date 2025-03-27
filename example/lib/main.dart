@@ -1,4 +1,3 @@
-// lib/main.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_kit/flutter_kit.dart';
 import 'package:get/get.dart';
@@ -7,15 +6,17 @@ import 'screens/home_screen.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await FlutterKit.initialize(
-    primaryColor: Color(0xFF6200EE),
-    accentColor: Color(0xFF03DAC5),
+    primaryColor: const Color(0xFF6200EE),
+    accentColor: const Color(0xFF03DAC5),
     fontFamily: 'Poppins',
   );
 
-  runApp(DemoApp());
+  runApp(const DemoApp());
 }
 
 class DemoApp extends StatelessWidget {
+  const DemoApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return FlutterKit.builder(
@@ -25,7 +26,7 @@ class DemoApp extends StatelessWidget {
         darkTheme: AppTheme.darkTheme(),
         themeMode: ThemeMode.system,
         debugShowCheckedModeBanner: false,
-        home: HomeScreen(),
+        home: const HomeScreen(),
       ),
     );
   }

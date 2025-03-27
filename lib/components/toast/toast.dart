@@ -33,14 +33,14 @@ class Toast {
 
     final Color backgroundColor = _getBackgroundColor(type);
     final IconData icon = customIcon ?? _getIcon(type);
-    final _title = title ?? _getDefaultTitle(type);
-    final _duration = duration ?? const Duration(seconds: 3);
-    final _margin =
+    final title0 = title ?? _getDefaultTitle(type);
+    final duration0 = duration ?? const Duration(seconds: 3);
+    final margin0 =
         margin ?? const EdgeInsets.symmetric(horizontal: 16, vertical: 24);
-    final _width = width ?? Get.width * 0.9;
-    final _dismissible = dismissible ?? true;
+    final width0 = width ?? Get.width * 0.9;
+    final dismissible0 = dismissible ?? true;
 
-    final _titleStyle = titleStyle ??
+    final titleStyle0 = titleStyle ??
         GoogleFonts.urbanist(
           color: Colors.white,
           fontWeight: FontWeight.w700,
@@ -48,7 +48,7 @@ class Toast {
           letterSpacing: 0.1,
         );
 
-    final _messageStyle = messageStyle ??
+    final messageStyle0 = messageStyle ??
         GoogleFonts.urbanist(
           color: Colors.white,
           fontSize: 14,
@@ -57,19 +57,19 @@ class Toast {
           height: 1.3,
         );
 
-    final _animationCurve = animationCurve ?? Curves.easeOutCirc;
-    final _animationDuration =
+    final animationCurve0 = animationCurve ?? Curves.easeOutCirc;
+    final animationDuration0 =
         animationDuration ?? const Duration(milliseconds: 400);
-    final _position = position ?? Alignment.bottomCenter;
+    final position0 = position ?? Alignment.bottomCenter;
 
     OverlayEntry? toastOverlay;
     Widget toast = Material(
       color: Colors.transparent,
       child: GestureDetector(
         onTap: () {
-          if (_dismissible) {
-            if (toastOverlay != null && toastOverlay!.mounted) {
-              toastOverlay!.remove();
+          if (dismissible0) {
+            if (toastOverlay != null && toastOverlay.mounted) {
+              toastOverlay.remove();
               if (onTap != null) onTap();
             }
           } else if (onTap != null) {
@@ -77,8 +77,8 @@ class Toast {
           }
         },
         child: Container(
-          width: _width,
-          margin: _margin,
+          width: width0,
+          margin: margin0,
           decoration: BoxDecoration(
             color: backgroundColor,
             borderRadius: BorderRadius.circular(16),
@@ -130,26 +130,26 @@ class Toast {
                           mainAxisSize: MainAxisSize.min,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            if (_title != null)
+                            if (title0 != null)
                               Text(
-                                _title,
-                                style: _titleStyle,
+                                title0,
+                                style: titleStyle0,
                               ),
-                            SizedBox(height: _title != null ? 4 : 0),
+                            SizedBox(height: title0 != null ? 4 : 0),
                             Text(
                               message,
-                              style: _messageStyle,
+                              style: messageStyle0,
                               maxLines: 3,
                               overflow: TextOverflow.ellipsis,
                             ),
                           ],
                         ),
                       ),
-                      if (_dismissible)
+                      if (dismissible0)
                         GestureDetector(
                           onTap: () {
-                            if (toastOverlay != null && toastOverlay!.mounted) {
-                              toastOverlay!.remove();
+                            if (toastOverlay != null && toastOverlay.mounted) {
+                              toastOverlay.remove();
                             }
                           },
                           child: Container(
@@ -181,15 +181,15 @@ class Toast {
       toastOverlay = OverlayEntry(builder: (context) {
         return TweenAnimationBuilder<double>(
           tween: Tween<double>(begin: 0.0, end: 1.0),
-          duration: _animationDuration,
-          curve: _animationCurve,
+          duration: animationDuration0,
+          curve: animationCurve0,
           builder: (context, value, child) {
             final safeOpacity = value.clamp(0.0, 1.0);
             return Opacity(
               opacity: safeOpacity,
               child: SafeArea(
                 child: Align(
-                  alignment: _position,
+                  alignment: position0,
                   child: Transform.translate(
                     offset: Offset(0, 20 * (1 - safeOpacity)),
                     child: child,
@@ -202,9 +202,9 @@ class Toast {
         );
       });
 
-      overlayState?.insert(toastOverlay!);
-      Future.delayed(_duration).then((_) {
-        if (toastOverlay != null && toastOverlay!.mounted) {
+      overlayState?.insert(toastOverlay);
+      Future.delayed(duration0).then((_) {
+        if (toastOverlay != null && toastOverlay.mounted) {
           try {
             final OverlayEntry fadeOutEntry = OverlayEntry(builder: (context) {
               return TweenAnimationBuilder<double>(
@@ -212,8 +212,8 @@ class Toast {
                 duration: const Duration(milliseconds: 300),
                 curve: Curves.easeOut,
                 onEnd: () {
-                  if (toastOverlay != null && toastOverlay!.mounted) {
-                    toastOverlay!.remove();
+                  if (toastOverlay != null && toastOverlay.mounted) {
+                    toastOverlay.remove();
                   }
                 },
                 builder: (context, value, child) {
@@ -222,7 +222,7 @@ class Toast {
                     opacity: safeOpacity,
                     child: SafeArea(
                       child: Align(
-                        alignment: _position,
+                        alignment: position0,
                         child: Transform.translate(
                           offset: Offset(0, 20 * (1 - safeOpacity)),
                           child: child,
@@ -235,8 +235,8 @@ class Toast {
               );
             });
 
-            if (toastOverlay != null && toastOverlay!.mounted) {
-              toastOverlay!.remove();
+            if (toastOverlay.mounted) {
+              toastOverlay.remove();
               overlayState?.insert(fadeOutEntry);
               Future.delayed(const Duration(milliseconds: 300)).then((_) {
                 if (fadeOutEntry.mounted) {
@@ -245,8 +245,8 @@ class Toast {
               });
             }
           } catch (e) {
-            if (toastOverlay != null && toastOverlay!.mounted) {
-              toastOverlay!.remove();
+            if (toastOverlay.mounted) {
+              toastOverlay.remove();
             }
             print("Error during toast removal: $e");
           }

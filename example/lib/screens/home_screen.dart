@@ -13,10 +13,12 @@ import 'toast_screen.dart';
 import 'api_screen.dart';
 
 class HomeScreen extends StatelessWidget {
+  const HomeScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: Navbar(
+      appBar: const Navbar(
         title: 'Flutter Kit Demo',
         style: NavbarStyle.standard,
         centerTitle: true,
@@ -61,19 +63,19 @@ class HomeScreen extends StatelessWidget {
         'title': 'Buttons',
         'description': 'Versatile button components',
         'icon': Icons.touch_app,
-        'screen': ButtonsScreen(),
+        'screen': const ButtonsScreen(),
       },
       {
         'title': 'Cards',
         'description': 'Different card styles',
         'icon': Icons.credit_card,
-        'screen': CardsScreen(),
+        'screen': const CardsScreen(),
       },
       {
         'title': 'Form Inputs',
         'description': 'Form controls and validation',
         'icon': Icons.edit,
-        'screen': FormsScreen(),
+        'screen': const FormsScreen(),
       },
       {
         'title': 'Pickers',
@@ -85,7 +87,7 @@ class HomeScreen extends StatelessWidget {
         'title': 'Charts',
         'description': 'Data visualization components',
         'icon': Icons.pie_chart,
-        'screen': ChartsScreen(),
+        'screen': const ChartsScreen(),
       },
       {
         'title': 'Layouts',
@@ -103,7 +105,7 @@ class HomeScreen extends StatelessWidget {
         'title': 'API Integration',
         'description': 'Working with REST APIs',
         'icon': Icons.cloud,
-        'screen': ApiScreen(),
+        'screen': const ApiScreen(),
       },
       {
         'title': 'Theming',
@@ -115,7 +117,7 @@ class HomeScreen extends StatelessWidget {
 
     return GridView.builder(
       shrinkWrap: true,
-      physics: NeverScrollableScrollPhysics(),
+      physics: const NeverScrollableScrollPhysics(),
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
         crossAxisSpacing: 16.w,

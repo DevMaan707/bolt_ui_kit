@@ -4,10 +4,12 @@ import 'package:flutter_kit/flutter_kit.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ButtonsScreen extends StatelessWidget {
+  const ButtonsScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: Navbar(
+      appBar: const Navbar(
         title: 'Buttons',
         style: NavbarStyle.standard,
       ),
@@ -89,7 +91,7 @@ class ButtonsScreen extends StatelessWidget {
             SizedBox(height: 32.h),
             _sectionTitle('Button States'),
             SizedBox(height: 16.h),
-            Button(
+            const Button(
               text: 'Disabled Button',
               type: ButtonType.primary,
               onPressed: null,
