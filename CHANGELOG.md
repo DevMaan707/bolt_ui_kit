@@ -92,3 +92,15 @@
 - Inconsistencies in date picker theming
 - Time picker bugs with theme colors
 - Various minor UI issues in pickers
+
+## 1.1.0 - 2025-03-26
+
+### Added
+
+- Beautiful pin-inputs
+- Example screens for all pin-input styles
+
+
+### Fixed
+
+- Inconsistencies iin code

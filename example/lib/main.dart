@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_kit/flutter_kit.dart';
+import 'package:bolt_ui_kit/bolt_kit.dart';
 import 'package:get/get.dart';
 import 'screens/home_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await FlutterKit.initialize(
+  await BoltKit.initialize(
     primaryColor: const Color(0xFF6200EE),
     accentColor: const Color(0xFF03DAC5),
     fontFamily: 'Poppins',
@@ -19,7 +19,7 @@ class DemoApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FlutterKit.builder(
+    return BoltKit.builder(
       builder: () => GetMaterialApp(
         title: 'Flutter Kit Demo',
         theme: AppTheme.lightTheme(),

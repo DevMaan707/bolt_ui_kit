@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_kit/components/navbar/navbar.dart';
-import 'package:flutter_kit/flutter_kit.dart';
-import 'package:flutter_kit_demo/screens/themes_screen.dart';
+import 'package:bolt_ui_kit/components/navbar/navbar.dart';
+import 'package:bolt_ui_kit/bolt_kit.dart';
+
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'buttons_screen.dart';
 import 'cards_screen.dart';
@@ -9,8 +9,10 @@ import 'forms_screen.dart';
 import 'charts_screen.dart';
 import 'layouts_screen.dart';
 import 'pickers_screen.dart';
+import 'themes_screen.dart';
 import 'toast_screen.dart';
 import 'api_screen.dart';
+import 'pinput_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -72,6 +74,12 @@ class HomeScreen extends StatelessWidget {
         'screen': const CardsScreen(),
       },
       {
+        'title': 'PIN Input',
+        'description': 'Verification code inputs',
+        'icon': Icons.pin,
+        'screen': const PinInputScreen(),
+      },
+      {
         'title': 'Form Inputs',
         'description': 'Form controls and validation',
         'icon': Icons.edit,
@@ -81,7 +89,7 @@ class HomeScreen extends StatelessWidget {
         'title': 'Pickers',
         'description': 'Date, time and file selectors',
         'icon': Icons.calendar_today,
-        'screen': PickersScreen(),
+        'screen': const PickersScreen(),
       },
       {
         'title': 'Charts',
@@ -93,13 +101,13 @@ class HomeScreen extends StatelessWidget {
         'title': 'Layouts',
         'description': 'Layout components and patterns',
         'icon': Icons.dashboard,
-        'screen': LayoutsScreen(),
+        'screen': const LayoutsScreen(),
       },
       {
         'title': 'Toast Notifications',
         'description': 'In-app notification messages',
         'icon': Icons.notifications,
-        'screen': ToastScreen(),
+        'screen': const ToastScreen(),
       },
       {
         'title': 'API Integration',
@@ -111,7 +119,7 @@ class HomeScreen extends StatelessWidget {
         'title': 'Theming',
         'description': 'Colors, typography, and styles',
         'icon': Icons.color_lens,
-        'screen': ThemeScreen(),
+        'screen': const ThemeScreen(),
       },
     ];
 

@@ -24,7 +24,7 @@ Add the following to your `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  flutter_kit: ^3.0.0
+  bolt_kit: ^3.0.0
 ```
 
 Then run:
@@ -39,7 +39,7 @@ Initialize the Flutter Kit in your `main.dart` file:
 
 ```dart
 import 'package:flutter/material.dart';
-import 'package:flutter_kit/flutter_kit.dart';
+import 'package:bolt_ui_kit/bolt_kit.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

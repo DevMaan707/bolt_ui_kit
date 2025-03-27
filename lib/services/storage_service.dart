@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 
 class StorageService extends GetxService {
   late final GetStorage _box;
-  static const String _namespace = 'flutter_kit_storage';
+  static const String _namespace = 'bolt_kit_storage';
 
   Future<StorageService> init() async {
     await GetStorage.init(_namespace);

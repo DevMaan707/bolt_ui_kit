@@ -1,4 +1,4 @@
-library flutter_kit;
+library bolt_ui_kit;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -18,10 +18,12 @@ export 'widgets/buttons/buttons.dart';
 export 'widgets/cards/cards.dart';
 export 'widgets/forms/forms.dart';
 export 'widgets/inputs/inputs.dart';
+export 'widgets/inputs/pinput.dart';
+export 'widgets/inputs/pinput_dialog.dart';
 export 'widgets/layouts/layout.dart';
 export 'pickers/pickers.dart';
 
-class FlutterKit {
+class BoltKit {
   static Future<void> initialize({
     required Color primaryColor,
     required Color accentColor,

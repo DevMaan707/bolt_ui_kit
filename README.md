@@ -20,9 +20,9 @@ Add Flutter Kit to your project by including it in your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  flutter_kit:
+  bolt_ui_kit:
     git:
-      url: https://github.com/DevMaan707/flutter_kit.git
+      url: https://github.com/DevMaan707/bolt_ui_kit.git
       ref: main
 ```
 
@@ -601,4 +601,4 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ---
 
-For more detailed information and examples, check out the [documentation](https://github.com/DevMaan707/flutter_kit/wiki).
+For more detailed information and examples, check out the [documentation](https://github.com/DevMaan707/bolt_ui_kit/wiki).

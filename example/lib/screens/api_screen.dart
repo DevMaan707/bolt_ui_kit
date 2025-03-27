@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_kit/components/navbar/navbar.dart';
-import 'package:flutter_kit/flutter_kit.dart';
+import 'package:bolt_ui_kit/components/navbar/navbar.dart';
+import 'package:bolt_ui_kit/bolt_kit.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ApiScreen extends StatefulWidget {
