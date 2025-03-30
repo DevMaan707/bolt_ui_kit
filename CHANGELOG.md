@@ -104,3 +104,10 @@
 ### Fixed
 
 - Inconsistencies iin code
+
+## 1.2.0 - 2025-03-30
+
+### Added
+
+- Two Viewers, Pdf and PPTx viewers
+- Updated Readme with new features

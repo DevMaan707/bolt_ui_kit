@@ -22,6 +22,8 @@ export 'widgets/inputs/pinput.dart';
 export 'widgets/inputs/pinput_dialog.dart';
 export 'widgets/layouts/layout.dart';
 export 'pickers/pickers.dart';
+export 'widgets/pdf_viewer/pdf_viewer.dart';
+export 'widgets/pdf_viewer/pdf_controller.dart';
 
 class BoltKit {
   static Future<void> initialize({

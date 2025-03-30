@@ -566,6 +566,158 @@ NavigationService.pushAndRemoveUntil(HomeScreen());
 // Go back
 NavigationService.pop();
 ```
+## API Service
+
+The `ApiService` class provides a robust HTTP client implementation using Dio with built-in logging, error handling, and retry logic.
+
+### Usage
+
+```dart
+// Initialize the API service
+final apiService = ApiService('https://api.example.com');
+
+// Make GET request
+final response = await apiService.get(
+  endpoint: '/users',
+  queryParams: {'page': 1},
+  headers: {'Authorization': 'Bearer token'},
+);
+
+// Make POST request
+final response = await apiService.post(
+  endpoint: '/users',
+  body: {'name': 'John Doe'},
+);
+
+// Make PUT request
+final response = await apiService.put(
+  endpoint: '/users/1',
+  body: {'name': 'John Doe Updated'},
+);
+
+// Make DELETE request
+final response = await apiService.delete(
+  endpoint: '/users/1',
+);
+
+// Safe request with error handling
+final result = await apiService.safeRequest<User>(
+  request: () => apiService.get(endpoint: '/users/1'),
+  defaultValue: null,
+);
+```
+
+### Features
+
+- Automatic error handling and logging
+- Request/response interceptors
+- Timeout handling
+- Pretty printing of requests/responses
+- Toast notifications for errors
+- Type-safe responses
+- Customizable base URL and timeout settings
+
+## New Widgets
+
+### PDF Viewer
+
+The `BoltPDFViewer` widget provides a feature-rich PDF viewer with navigation controls and customization options.
+
+```dart
+// Show PDF from file
+BoltPDFViewer.showPdfDialog(
+  context: context,
+  filePath: 'assets/document.pdf',
+  title: 'Document Viewer',
+);
+
+// Show PDF from URL
+BoltPDFViewer.openPdf(
+  context: context,
+  url: 'https://example.com/document.pdf',
+  enableNavigation: true,
+);
+```
+
+Features:
+- File, network and asset source support
+- Navigation controls
+- Page counter
+- Full-screen mode
+- Custom toolbar actions
+- Error handling
+- Loading states
+- Dark mode support
+
+### Slides Viewer
+
+The `BoltSlidesViewer` widget allows viewing presentations in various formats with a rich set of controls.
+
+```dart
+// Show Google Slides
+BoltSlidesViewer.showSlidesDialog(
+  context: context,
+  googleSlidesId: 'presentation_id',
+  title: 'Presentation',
+);
+
+// Open PowerPoint file
+BoltSlidesViewer.openSlidesViewer(
+  context: context,
+  filePath: 'presentation.pptx',
+  sourceType: SlidesSourceType.pptx,
+);
+```
+
+Features:
+- Support for multiple formats (PDF, PPTX, Google Slides)
+- Navigation controls
+- Slide counter
+- Full-screen presentation mode
+- Auto-conversion to PDF
+- Network file support
+- Custom toolbar actions
+- Error handling
+- Loading states
+- Dark mode support
+
+### Input Components
+
+#### PinInput
+
+```dart
+// Basic PIN input
+BoltPinInput(
+  length: 6,
+  onCompleted: (pin) => print('PIN: $pin'),
+);
+
+// Custom styled PIN dialog
+showPinInputDialog(
+  context: context,
+  title: 'Enter PIN',
+  length: 4,
+  theme: PinInputTheme.outlined,
+);
+```
+
+Features:
+- Multiple visual themes
+- Customizable styling
+- Error handling
+- Secure input mode
+- Dialog helper
+- Validation support
+- Custom keyboard types
+
+The library also includes other components like:
+- File picker with preview
+- Image picker with cropping
+- Date/time pickers
+- Calendar picker
+- QR code scanner
+
+All components are designed to be customizable, responsive and support both light and dark themes.
 
 ## Best Practices
 

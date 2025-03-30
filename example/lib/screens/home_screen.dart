@@ -8,7 +8,9 @@ import 'cards_screen.dart';
 import 'forms_screen.dart';
 import 'charts_screen.dart';
 import 'layouts_screen.dart';
+import 'pdf_viewer_screen.dart';
 import 'pickers_screen.dart';
+import 'slides_viewer_screen.dart';
 import 'themes_screen.dart';
 import 'toast_screen.dart';
 import 'api_screen.dart';
@@ -96,6 +98,18 @@ class HomeScreen extends StatelessWidget {
         'description': 'Data visualization components',
         'icon': Icons.pie_chart,
         'screen': const ChartsScreen(),
+      },
+      {
+        'title': 'PDF Viewer',
+        'description': 'View PDF documents',
+        'icon': Icons.picture_as_pdf,
+        'screen': const PdfViewerScreen(),
+      },
+      {
+        'title': 'Slides Viewer',
+        'description': 'View presentations',
+        'icon': Icons.slideshow,
+        'screen': const SlidesViewerScreen(),
       },
       {
         'title': 'Layouts',
