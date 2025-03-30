@@ -239,7 +239,8 @@ class _BoltSlidesViewerState extends State<BoltSlidesViewer>
   }
 
   Future<void> _checkInternetConnection() async {
-    _isInternetConnected = await InternetConnectionChecker().hasConnection;
+    _isInternetConnected =
+        await InternetConnectionChecker.instance.hasConnection;
     if (!_isInternetConnected &&
         (widget.sourceType == SlidesSourceType.network ||
             widget.sourceType == SlidesSourceType.googleSlides)) {
@@ -788,13 +789,11 @@ class _BoltSlidesViewerState extends State<BoltSlidesViewer>
           'totalSlides;'
           '} else { 0 }');
 
-      if (result != null) {
-        final count = int.tryParse(result.toString());
-        if (count != null) {
-          setState(() {
-            _totalSlides = count;
-          });
-        }
+      final count = int.tryParse(result.toString());
+      if (count != null) {
+        setState(() {
+          _totalSlides = count;
+        });
       }
     } catch (e) {
       print('Error getting total slides count: $e');
@@ -1149,94 +1148,6 @@ class _BoltSlidesViewerState extends State<BoltSlidesViewer>
           ),
         ],
       ),
-    );
-  }
-
-  void _showJumpToSlideDialog() {
-    final TextEditingController slideController = TextEditingController();
-    final isWideScreen = MediaQuery.of(context).size.width > 600.w;
-
-    showDialog(
-      context: context,
-      builder: (context) {
-        return Dialog(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16.r),
-          ),
-          child: Container(
-            width: isWideScreen ? 400.w : null,
-            padding: EdgeInsets.all(24.w),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(
-                  'Jump to Slide',
-                  style: AppTextThemes.heading5(),
-                ),
-                SizedBox(height: 16.h),
-                Text(
-                  'Enter a slide number between 1 and ${_totalSlides > 0 ? _totalSlides : '?'}',
-                  style: AppTextThemes.bodyMedium(),
-                  textAlign: TextAlign.center,
-                ),
-                SizedBox(height: 24.h),
-                TextField(
-                  controller: slideController,
-                  keyboardType: TextInputType.number,
-                  textAlign: TextAlign.center,
-                  autofocus: true,
-                  style: AppTextThemes.bodyLarge(fontWeight: FontWeight.w500),
-                  decoration: InputDecoration(
-                    hintText: 'Slide number',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8.r),
-                      borderSide: BorderSide(
-                        color: _isDark ? Colors.grey[600]! : Colors.grey[300]!,
-                      ),
-                    ),
-                    focusedBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8.r),
-                      borderSide: BorderSide(
-                        color: AppColors.primary,
-                        width: 2.w,
-                      ),
-                    ),
-                    contentPadding: EdgeInsets.symmetric(
-                      horizontal: 16.w,
-                      vertical: 12.h,
-                    ),
-                    filled: true,
-                    fillColor: _isDark ? Colors.grey[800] : Colors.grey[50],
-                  ),
-                ),
-                SizedBox(height: 24.h),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Button(
-                      text: 'Cancel',
-                      type: ButtonType.outlined,
-                      onPressed: () => Navigator.pop(context),
-                    ),
-                    SizedBox(width: 12.w),
-                    Button(
-                      text: 'Jump',
-                      type: ButtonType.primary,
-                      onPressed: () {
-                        final slideNumber = int.tryParse(slideController.text);
-                        if (slideNumber != null && slideNumber > 0) {
-                          _jumpToSlide(slideNumber - 1); // Convert to 0-indexed
-                          Navigator.pop(context);
-                        }
-                      },
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-        );
-      },
     );
   }
 }

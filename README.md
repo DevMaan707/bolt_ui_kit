@@ -36,7 +36,7 @@ Before using any components, initialize the Flutter Kit with your app's colors a
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  await FlutterKit.initialize(
+  await BoltKit.initialize(
     primaryColor: Color(0xFF1976D2),   // Your primary brand color
     accentColor: Color(0xFF64B5F6),    // Your accent/secondary color
     fontFamily: 'Poppins',             // Optional: Default font family

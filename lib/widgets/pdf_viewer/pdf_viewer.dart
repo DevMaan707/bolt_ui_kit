@@ -156,7 +156,6 @@ class _BoltPDFViewerState extends State<BoltPDFViewer>
   int _totalPages = 0;
   PDFViewController? _pdfViewController;
   String? _errorMessage;
-  double _currentZoom = 1.0;
   bool _isFullScreen = false;
   final PDFViewerController _pdfController = PDFViewerController();
   late AnimationController _animationController;
@@ -570,7 +569,6 @@ class _BoltPDFViewerState extends State<BoltPDFViewer>
                 color: AppColors.primary,
                 onPressed: () {
                   // Zoom in functionality
-                  _currentZoom += 0.25;
                   // Zoom functionality would be implemented based on PDF library capabilities
                 },
                 tooltip: 'Zoom In',
