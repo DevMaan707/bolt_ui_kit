@@ -51,6 +51,12 @@ class BoltPDFViewer extends StatefulWidget {
 
   final bool isModal;
 
+  /// FAB icon to display
+  final IconData? fabIcon;
+
+  /// Function to execute when FAB is pressed
+  final VoidCallback? onFabPressed;
+
   const BoltPDFViewer({
     super.key,
     this.filePath,
@@ -73,6 +79,8 @@ class BoltPDFViewer extends StatefulWidget {
     this.onPageChanged,
     this.onError,
     this.isModal = false,
+    this.fabIcon,
+    this.onFabPressed,
   }) : assert(
           (source == PDFViewSource.file && filePath != null) ||
               (source == PDFViewSource.network && url != null) ||
@@ -89,6 +97,8 @@ class BoltPDFViewer extends StatefulWidget {
     bool barrierDismissible = true,
     bool enableNavigation = true,
     bool enableTextSelection = true,
+    IconData? fabIcon,
+    VoidCallback? onFabPressed,
   }) async {
     return showDialog(
       context: context,
@@ -111,6 +121,8 @@ class BoltPDFViewer extends StatefulWidget {
               enableNavigation: enableNavigation,
               enableTextSelection: enableTextSelection,
               isModal: true,
+              fabIcon: fabIcon,
+              onFabPressed: onFabPressed,
             ),
           ),
         ),
@@ -127,6 +139,8 @@ class BoltPDFViewer extends StatefulWidget {
     String? title,
     bool enableNavigation = true,
     bool enableTextSelection = true,
+    IconData? fabIcon,
+    VoidCallback? onFabPressed,
   }) async {
     await Navigator.of(context).push(
       MaterialPageRoute(
@@ -138,6 +152,8 @@ class BoltPDFViewer extends StatefulWidget {
           title: title,
           enableNavigation: enableNavigation,
           enableTextSelection: enableTextSelection,
+          fabIcon: fabIcon,
+          onFabPressed: onFabPressed,
         ),
       ),
     );
@@ -330,6 +346,14 @@ class _BoltPDFViewerState extends State<BoltPDFViewer>
           ],
         ),
       ),
+      // Added FAB with the icon and onPressed callback from the widget parameters
+      floatingActionButton: widget.fabIcon != null
+          ? FloatingActionButton(
+              onPressed: widget.onFabPressed,
+              backgroundColor: AppColors.primary,
+              child: Icon(widget.fabIcon),
+            )
+          : null,
     );
   }
 

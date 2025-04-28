@@ -513,7 +513,7 @@ class _BoltSlidesViewerState extends State<BoltSlidesViewer>
       } else {
         // Try generic JavaScript approach
         await _webViewController!.runJavaScript(
-            'if(typeof SlidesApp !== "undefined") {SlidesApp.getActivePresentation().getSlides()[\$slideIndex].selectAsCurrentSlide();}');
+            'if(typeof SlidesApp !== "undefined") {SlidesApp.getActivePresentation().getSlides()[$slideIndex].selectAsCurrentSlide();}');
       }
       setState(() {
         _currentSlide = slideIndex;
@@ -1075,7 +1075,7 @@ class _BoltSlidesViewerState extends State<BoltSlidesViewer>
                 )
               else
                 Text(
-                  '\${_currentSlide + 1}',
+                  '${_currentSlide + 1}',
                   style: AppTextThemes.bodyMedium(fontWeight: FontWeight.w600),
                   textAlign: TextAlign.center,
                 ),

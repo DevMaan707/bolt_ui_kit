@@ -1107,7 +1107,7 @@ class LayoutsScreen extends StatelessWidget {
               type: i % 2 == 0 ? CardType.standard : CardType.outlined,
               margin: EdgeInsets.only(bottom: 16.h),
               child: Text(
-                'Scrollable content item #\$i',
+                'Scrollable content item #$i',
                 style: AppTextThemes.bodyMedium(),
               ),
             ),
