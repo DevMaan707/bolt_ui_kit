@@ -111,3 +111,9 @@
 
 - Two Viewers, Pdf and PPTx viewers
 - Updated Readme with new features
+
+## 1.2.1 - 2025-04-28
+
+### Added
+
+- FAB parameter in PdfViewer
