@@ -24,6 +24,8 @@ export 'widgets/layouts/layout.dart';
 export 'pickers/pickers.dart';
 export 'widgets/pdf_viewer/pdf_viewer.dart';
 export 'widgets/pdf_viewer/pdf_controller.dart';
+export 'widgets/glass/glass_container.dart';
+export 'widgets/glass/glass_widgets.dart';
 
 class BoltKit {
   static Future<void> initialize({

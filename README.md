@@ -7,6 +7,7 @@ A comprehensive and modular Flutter UI kit that offers reusable widgets, themes,
 - **Responsive Design**: Built with `flutter_screenutil` for fully responsive UI across all devices
 - **Dynamic Theming**: Easily customize themes with your brand colors
 - **Modular Widgets**: Pre-built, customizable UI components
+- **Glass Morphism**: Beautiful frosted glass effects with backdrop blur
 - **API Integration**: Simplified API handling with error management
 - **Toast Notifications**: Beautiful toast messages for user feedback
 - **Layouts**: Flexible layout options for different UI needs
@@ -60,6 +61,519 @@ class MyApp extends StatelessWidget {
   }
 }
 ```
+
+## Glass Morphism
+
+Flutter Kit includes a comprehensive Glass Morphism system that creates beautiful frosted glass effects with backdrop blur, transparency, and subtle borders. Perfect for modern UI designs.
+
+### Basic Glass Container
+
+```dart
+// Simple frosted glass effect
+GlassContainer(
+  child: Text(
+    'Hello Glass!',
+    style: TextStyle(color: Colors.white),
+  ),
+)
+
+// Custom glass with specific type
+GlassContainer(
+  type: GlassType.crystal,
+  blurIntensity: 15.0,
+  backgroundOpacity: 0.3,
+  borderOpacity: 0.5,
+  child: YourWidget(),
+)
+```
+
+### Glass Types
+
+The Glass Morphism system includes 6 predefined glass types, each with unique visual characteristics:
+
+#### 1. Frosted Glass (Default)
+Classic frosted glass effect with moderate blur and opacity.
+```dart
+GlassContainer(
+  type: GlassType.frosted,
+  child: Text('Frosted Glass'),
+)
+```
+
+#### 2. Crystal Glass
+More transparent with subtle tinting, perfect for elegant overlays.
+```dart
+GlassContainer(
+  type: GlassType.crystal,
+  child: Text('Crystal Glass'),
+)
+```
+
+#### 3. Smoky Glass
+Darker appearance with higher opacity, great for dramatic effects.
+```dart
+GlassContainer(
+  type: GlassType.smoky,
+  child: Text('Smoky Glass'),
+)
+```
+
+#### 4. Vibrant Glass
+Uses your app's primary color for colorful glass effects.
+```dart
+GlassContainer(
+  type: GlassType.vibrant,
+  child: Text('Vibrant Glass'),
+)
+```
+
+#### 5. Minimal Glass
+Very subtle effect for understated elegance.
+```dart
+GlassContainer(
+  type: GlassType.minimal,
+  child: Text('Minimal Glass'),
+)
+```
+
+#### 6. Custom Glass
+Full control over all properties for unique effects.
+```dart
+GlassContainer(
+  type: GlassType.custom,
+  backgroundColor: Colors.purple,
+  backgroundOpacity: 0.4,
+  blurIntensity: 20.0,
+  borderColor: Colors.white,
+  borderOpacity: 0.6,
+  child: Text('Custom Glass'),
+)
+```
+
+### Glass Shapes
+
+Control the shape of your glass containers with 4 different options:
+
+#### Rectangle
+```dart
+GlassContainer(
+  shape: GlassShape.rectangle,
+  child: YourWidget(),
+)
+```
+
+#### Rounded Rectangle
+```dart
+GlassContainer(
+  shape: GlassShape.roundedRectangle,
+  radius: 20.0, // Custom radius
+  child: YourWidget(),
+)
+
+// Or with custom border radius
+GlassContainer(
+  shape: GlassShape.roundedRectangle,
+  borderRadius: BorderRadius.only(
+    topLeft: Radius.circular(30),
+    bottomRight: Radius.circular(30),
+  ),
+  child: YourWidget(),
+)
+```
+
+#### Circle
+```dart
+GlassContainer(
+  shape: GlassShape.circle,
+  width: 100,
+  height: 100,
+  child: Icon(Icons.star, color: Colors.white),
+)
+```
+
+#### Custom Shape
+```dart
+GlassContainer(
+  shape: GlassShape.custom,
+  borderRadius: BorderRadius.all(Radius.elliptical(50, 25)),
+  child: YourWidget(),
+)
+```
+
+### Convenience Constructors
+
+Pre-configured glass containers for common use cases:
+
+#### Glass Card
+```dart
+GlassContainer.card(
+  child: Column(
+    children: [
+      Text('Card Title', style: TextStyle(color: Colors.white)),
+      Text('Card content goes here...'),
+    ],
+  ),
+)
+```
+
+#### Glass Button
+```dart
+GlassContainer.button(
+  onTap: () => handleButtonPress(),
+  child: Text('Glass Button', style: TextStyle(color: Colors.white)),
+)
+```
+
+#### Glass Dialog
+```dart
+GlassContainer.dialog(
+  width: 300,
+  child: Column(
+    mainAxisSize: MainAxisSize.min,
+    children: [
+      Text('Dialog Title'),
+      SizedBox(height: 16),
+      Text('Dialog message goes here...'),
+      // Action buttons
+    ],
+  ),
+)
+```
+
+#### Glass App Bar
+```dart
+GlassContainer.appBar(
+  child: Row(
+    children: [
+      IconButton(icon: Icon(Icons.menu), onPressed: () {}),
+      Expanded(child: Text('App Title')),
+      IconButton(icon: Icon(Icons.search), onPressed: () {}),
+    ],
+  ),
+)
+```
+
+#### Glass Bottom Sheet
+```dart
+GlassContainer.bottomSheet(
+  child: Column(
+    mainAxisSize: MainAxisSize.min,
+    children: [
+      Text('Bottom Sheet Content'),
+      // More content
+    ],
+  ),
+)
+```
+
+#### Glass Overlay
+```dart
+GlassContainer.overlay(
+  onTap: () => dismissOverlay(),
+  child: Center(
+    child: Text('Overlay Content'),
+  ),
+)
+```
+
+### Advanced Glass Effects
+
+#### Glass with Gradient Overlay
+```dart
+GlassContainer(
+  type: GlassType.custom,
+  gradient: LinearGradient(
+    colors: [
+      Colors.purple.withOpacity(0.3),
+      Colors.blue.withOpacity(0.2),
+    ],
+  ),
+  gradientOpacity: 0.8,
+  child: YourWidget(),
+)
+```
+
+#### Nested Glass Containers
+```dart
+GlassContainer(
+  type: GlassType.smoky,
+  padding: EdgeInsets.all(20),
+  child: Column(
+    children: [
+      Text('Outer Glass Container'),
+      SizedBox(height: 16),
+      GlassContainer(
+        type: GlassType.crystal,
+        padding: EdgeInsets.all(16),
+        child: Text('Inner Glass Container'),
+      ),
+    ],
+  ),
+)
+```
+
+#### Transformed Glass
+```dart
+GlassContainer(
+  type: GlassType.vibrant,
+  transform: Matrix4.rotationZ(0.1),
+  child: Text('Rotated Glass'),
+)
+```
+
+#### Interactive Glass Elements
+```dart
+GlassContainer(
+  type: GlassType.crystal,
+  onTap: () => print('Glass tapped!'),
+  onLongPress: () => print('Glass long pressed!'),
+  onDoubleTap: () => print('Glass double tapped!'),
+  child: Text('Interactive Glass'),
+)
+```
+
+### Pre-built Glass Widgets
+
+For common UI patterns, use the pre-built glass widgets:
+
+#### Glass Loading Indicator
+```dart
+GlassWidgets.loading(
+  message: 'Loading...',
+  type: GlassType.frosted,
+)
+```
+
+#### Glass Notification
+```dart
+GlassWidgets.notification(
+  title: 'New Message',
+  message: 'You have received a new message',
+  icon: Icons.message,
+  onTap: () => openMessage(),
+  onDismiss: () => dismissNotification(),
+)
+```
+
+#### Glass Search Bar
+```dart
+GlassWidgets.searchBar(
+  hintText: 'Search...',
+  onChanged: (query) => performSearch(query),
+  onClear: () => clearSearch(),
+)
+```
+
+#### Glass Tab Bar
+```dart
+GlassWidgets.tabBar(
+  tabs: ['Home', 'Search', 'Profile'],
+  selectedIndex: selectedTab,
+  onTabSelected: (index) => selectTab(index),
+)
+```
+
+#### Glass Progress Indicator
+```dart
+GlassWidgets.progressIndicator(
+  progress: 0.75,
+  label: 'Upload Progress',
+  progressColor: Colors.green,
+)
+```
+
+#### Glass Image Overlay
+```dart
+GlassWidgets.imageOverlay(
+  child: Image.asset('assets/background.jpg'),
+  title: 'Beautiful Landscape',
+  subtitle: 'Captured in Switzerland',
+  actions: [
+    IconButton(icon: Icon(Icons.favorite), onPressed: () {}),
+    IconButton(icon: Icon(Icons.share), onPressed: () {}),
+  ],
+)
+```
+
+#### Glass Floating Action Button
+```dart
+GlassWidgets.floatingActionButton(
+  onPressed: () => addItem(),
+  icon: Icons.add,
+  type: GlassType.vibrant,
+)
+```
+
+### Glass Morphism Customization
+
+#### Full Customization Options
+```dart
+GlassContainer(
+  // Shape and size
+  width: 300,
+  height: 200,
+  shape: GlassShape.roundedRectangle,
+  borderRadius: BorderRadius.circular(20),
+
+  // Glass effect properties
+  type: GlassType.custom,
+  backgroundColor: Colors.blue,
+  backgroundOpacity: 0.3,
+  blurIntensity: 15.0,
+
+  // Border properties
+  borderColor: Colors.white,
+  borderWidth: 1.5,
+  borderOpacity: 0.4,
+
+  // Shadow properties
+  addShadow: true,
+  shadowColor: Colors.black,
+  shadowBlurRadius: 20.0,
+  shadowOffset: Offset(0, 10),
+
+  // Layout properties
+  padding: EdgeInsets.all(16),
+  margin: EdgeInsets.all(8),
+  alignment: Alignment.center,
+
+  // Transform
+  transform: Matrix4.identity()..scale(1.1),
+
+  // Gradient overlay
+  gradient: LinearGradient(
+    colors: [Colors.purple, Colors.blue],
+  ),
+  gradientOpacity: 0.2,
+
+  // Interaction
+  onTap: () => handleTap(),
+  onLongPress: () => handleLongPress(),
+
+  child: YourWidget(),
+)
+```
+
+### Real-World Glass Morphism Examples
+
+#### Music Player Card
+```dart
+GlassContainer.card(
+  type: GlassType.frosted,
+  child: Column(
+    children: [
+      Row(
+        children: [
+          Container(
+            width: 60,
+            height: 60,
+            decoration: BoxDecoration(
+              color: Colors.white.withOpacity(0.2),
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Icon(Icons.music_note, color: Colors.white),
+          ),
+          SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('Song Title', style: TextStyle(color: Colors.white)),
+                Text('Artist Name', style: TextStyle(color: Colors.white70)),
+              ],
+            ),
+          ),
+        ],
+      ),
+      SizedBox(height: 16),
+      Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          GlassContainer.button(
+            type: GlassType.minimal,
+            onTap: () => previousTrack(),
+            child: Icon(Icons.skip_previous, color: Colors.white),
+          ),
+          GlassContainer.button(
+            type: GlassType.crystal,
+            onTap: () => togglePlayPause(),
+            child: Icon(Icons.play_arrow, color: Colors.white),
+          ),
+          GlassContainer.button(
+            type: GlassType.minimal,
+            onTap: () => nextTrack(),
+            child: Icon(Icons.skip_next, color: Colors.white),
+          ),
+        ],
+      ),
+    ],
+  ),
+)
+```
+
+#### Weather Card
+```dart
+GlassContainer.card(
+  type: GlassType.crystal,
+  child: Column(
+    children: [
+      Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('San Francisco', style: TextStyle(color: Colors.white)),
+              Text('Partly Cloudy', style: TextStyle(color: Colors.white70)),
+            ],
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Text('72°', style: TextStyle(color: Colors.white, fontSize: 24)),
+              Icon(Icons.wb_cloudy, color: Colors.white),
+            ],
+          ),
+        ],
+      ),
+      SizedBox(height: 16),
+      Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          _weatherStat('Humidity', '65%'),
+          _weatherStat('Wind', '12 mph'),
+          _weatherStat('UV Index', '3'),
+        ],
+      ),
+    ],
+  ),
+)
+```
+
+#### Navigation Card
+```dart
+GlassContainer.card(
+  type: GlassType.vibrant,
+  child: Row(
+    mainAxisAlignment: MainAxisAlignment.spaceAround,
+    children: [
+      _navItem(Icons.home, 'Home', true),
+      _navItem(Icons.search, 'Search', false),
+      _navItem(Icons.favorite, 'Likes', false),
+      _navItem(Icons.person, 'Profile', false),
+    ],
+  ),
+)
+```
+
+### Best Practices for Glass Morphism
+
+1. **Use Appropriate Backgrounds**: Glass effects work best over colorful or textured backgrounds
+2. **Consider Readability**: Ensure text remains readable over glass surfaces
+3. **Layer Thoughtfully**: Use different glass types to create visual hierarchy
+4. **Maintain Consistency**: Stick to 2-3 glass types throughout your app
+5. **Performance**: Avoid excessive nesting of glass containers
+6. **Accessibility**: Ensure sufficient contrast for users with visual impairments
 
 ## Components Usage
 
@@ -176,6 +690,7 @@ Toast.show(
   dismissible: false,
 )
 ```
+
 ## Pickers & Selectors
 
 Flutter Kit includes beautiful, customizable pickers that follow your app's theme for consistent UI:
@@ -280,6 +795,7 @@ final qrCode = await AppPickers.scanQR();
 final dateRange = await AppPickers.pickDateRange();
 final dates = await AppPickers.pickMultipleDates();
 ```
+
 ### Input Forms
 
 ```dart
@@ -566,6 +1082,7 @@ NavigationService.pushAndRemoveUntil(HomeScreen());
 // Go back
 NavigationService.pop();
 ```
+
 ## API Service
 
 The `ApiService` class provides a robust HTTP client implementation using Dio with built-in logging, error handling, and retry logic.
@@ -705,6 +1222,26 @@ Features:
 - Multiple visual themes
 - Customizable styling
 - Error handling
+- Secure input mode
+- Dialog helper
+- Validation support
+- Custom keyboard types
+
+The library also includes other components like:
+- File picker with preview
+- Image picker with cropping
+- Date/time pickers
+- Calendar picker
+- QR code scanner
+
+All components are designed to be customizable, responsive and support both light and dark themes.
+
+## Best Practices
+
+- Initialize Early
+- Consistent Typography
+- Responsive Design
+- Error Handling
 - Secure input mode
 - Dialog helper
 - Validation support

@@ -117,3 +117,9 @@
 ### Added
 
 - FAB parameter in PdfViewer
+
+## 1.2.2 - 2025-07-08
+
+### Added
+
+- Glassmorphism widgets and containers

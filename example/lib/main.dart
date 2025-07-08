@@ -157,6 +157,12 @@ class HomeScreen extends StatelessWidget {
         'icon': Icons.color_lens,
         'screen': const ThemeScreen(),
       },
+      {
+        'title': 'Glass Morphism',
+        'description': 'Glass effect containers and overlays',
+        'icon': Icons.blur_on,
+        'screen': const GlassMorphismScreen(),
+      },
     ];
 
     return GridView.builder(
@@ -2993,5 +2999,1168 @@ class _ApiScreenState extends State<ApiScreen> {
     setState(() {
       _selectedPost = post;
     });
+  }
+}
+
+class GlassMorphismScreen extends StatefulWidget {
+  const GlassMorphismScreen({super.key});
+
+  @override
+  State<GlassMorphismScreen> createState() => _GlassMorphismScreenState();
+}
+
+class _GlassMorphismScreenState extends State<GlassMorphismScreen> {
+  GlassType _selectedType = GlassType.frosted;
+  GlassShape _selectedShape = GlassShape.roundedRectangle;
+  double _blurIntensity = 10.0;
+  double _backgroundOpacity = 0.2;
+  double _borderOpacity = 0.2;
+  bool _addShadow = true;
+  Color _selectedColor = Colors.white;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Stack(
+        children: [
+          // Background gradient
+          _buildBackgroundGradient(),
+
+          // Content
+          SafeArea(
+            child: Column(
+              children: [
+                // Custom glass app bar
+                _buildGlassAppBar(context),
+
+                // Main content
+                Expanded(
+                  child: SingleChildScrollView(
+                    padding: EdgeInsets.all(16.w),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        _buildCustomizationControls(),
+                        SizedBox(height: 24.h),
+                        _buildLivePreview(),
+                        SizedBox(height: 32.h),
+                        _buildTypeExamples(),
+                        SizedBox(height: 32.h),
+                        _buildShapeExamples(),
+                        SizedBox(height: 32.h),
+                        _buildInteractiveExamples(),
+                        SizedBox(height: 32.h),
+                        _buildAdvancedExamples(),
+                        SizedBox(height: 32.h),
+                        _buildRealWorldExamples(),
+                        SizedBox(height: 32.h),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildBackgroundGradient() {
+    return Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [
+            AppColors.primary.withOpacity(0.8),
+            AppColors.accent.withOpacity(0.7),
+            Colors.purple.withOpacity(0.6),
+            Colors.pink.withOpacity(0.5),
+            Colors.orange.withOpacity(0.4),
+          ],
+          stops: const [0.0, 0.2, 0.4, 0.7, 1.0],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildGlassAppBar(BuildContext context) {
+    return GlassContainer.appBar(
+      type: GlassType.crystal,
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
+        child: Row(
+          children: [
+            IconButton(
+              icon: Icon(Icons.arrow_back, color: Colors.white),
+              onPressed: () => Navigator.pop(context),
+            ),
+            Expanded(
+              child: Text(
+                'Glass Morphism',
+                style: AppTextThemes.heading6(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
+            IconButton(
+              icon: Icon(Icons.info_outline, color: Colors.white),
+              onPressed: () => _showInfoDialog(context),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildCustomizationControls() {
+    return GlassContainer.card(
+      type: GlassType.frosted,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Customize Glass Effect',
+            style: AppTextThemes.heading6(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          SizedBox(height: 16.h),
+
+          // Glass Type Selection
+          Text(
+            'Glass Type',
+            style: AppTextThemes.bodyMedium(
+              color: Colors.white,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+          SizedBox(height: 8.h),
+          Wrap(
+            spacing: 8.w,
+            runSpacing: 8.h,
+            children: GlassType.values.map((type) {
+              return GestureDetector(
+                onTap: () => setState(() => _selectedType = type),
+                child: Container(
+                  padding:
+                      EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
+                  decoration: BoxDecoration(
+                    color: _selectedType == type
+                        ? Colors.white.withOpacity(0.3)
+                        : Colors.white.withOpacity(0.1),
+                    borderRadius: BorderRadius.circular(20.r),
+                    border: Border.all(
+                      color: _selectedType == type
+                          ? Colors.white.withOpacity(0.6)
+                          : Colors.white.withOpacity(0.2),
+                    ),
+                  ),
+                  child: Text(
+                    type.name,
+                    style: AppTextThemes.bodySmall(
+                      color: Colors.white,
+                      fontWeight: _selectedType == type
+                          ? FontWeight.bold
+                          : FontWeight.normal,
+                    ),
+                  ),
+                ),
+              );
+            }).toList(),
+          ),
+
+          SizedBox(height: 20.h),
+
+          // Blur Intensity Slider
+          Text(
+            'Blur Intensity: ${_blurIntensity.toStringAsFixed(1)}',
+            style: AppTextThemes.bodyMedium(
+              color: Colors.white,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+          Slider(
+            value: _blurIntensity,
+            min: 0.0,
+            max: 30.0,
+            divisions: 30,
+            activeColor: Colors.white,
+            inactiveColor: Colors.white.withOpacity(0.3),
+            onChanged: (value) => setState(() => _blurIntensity = value),
+          ),
+
+          // Background Opacity Slider
+          Text(
+            'Background Opacity: ${(_backgroundOpacity * 100).toInt()}%',
+            style: AppTextThemes.bodyMedium(
+              color: Colors.white,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+          Slider(
+            value: _backgroundOpacity,
+            min: 0.0,
+            max: 1.0,
+            divisions: 20,
+            activeColor: Colors.white,
+            inactiveColor: Colors.white.withOpacity(0.3),
+            onChanged: (value) => setState(() => _backgroundOpacity = value),
+          ),
+
+          // Border Opacity Slider
+          Text(
+            'Border Opacity: ${(_borderOpacity * 100).toInt()}%',
+            style: AppTextThemes.bodyMedium(
+              color: Colors.white,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+          Slider(
+            value: _borderOpacity,
+            min: 0.0,
+            max: 1.0,
+            divisions: 20,
+            activeColor: Colors.white,
+            inactiveColor: Colors.white.withOpacity(0.3),
+            onChanged: (value) => setState(() => _borderOpacity = value),
+          ),
+
+          // Shadow Toggle
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Add Shadow',
+                style: AppTextThemes.bodyMedium(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              Switch(
+                value: _addShadow,
+                onChanged: (value) => setState(() => _addShadow = value),
+                activeColor: Colors.white,
+                activeTrackColor: Colors.white.withOpacity(0.5),
+                inactiveThumbColor: Colors.white.withOpacity(0.7),
+                inactiveTrackColor: Colors.white.withOpacity(0.3),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildLivePreview() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Live Preview',
+          style: AppTextThemes.heading5(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        SizedBox(height: 16.h),
+        Center(
+          child: GlassContainer(
+            type: _selectedType,
+            shape: _selectedShape,
+            blurIntensity: _blurIntensity,
+            backgroundOpacity: _backgroundOpacity,
+            borderOpacity: _borderOpacity,
+            addShadow: _addShadow,
+            backgroundColor: _selectedColor,
+            width: 200.w,
+            height: 150.h,
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.auto_awesome,
+                    color: Colors.white,
+                    size: 32.sp,
+                  ),
+                  SizedBox(height: 8.h),
+                  Text(
+                    'Glass Effect',
+                    style: AppTextThemes.bodyLarge(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Text(
+                    _selectedType.name,
+                    style: AppTextThemes.bodySmall(
+                      color: Colors.white70,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildTypeExamples() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Glass Types',
+          style: AppTextThemes.heading5(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        SizedBox(height: 16.h),
+        GridView.builder(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            crossAxisSpacing: 16.w,
+            mainAxisSpacing: 16.h,
+            childAspectRatio: 1.2,
+          ),
+          itemCount: GlassType.values.length,
+          itemBuilder: (context, index) {
+            final type = GlassType.values[index];
+            return GlassContainer(
+              type: type,
+              onTap: () {
+                setState(() => _selectedType = type);
+                Toast.show(
+                  message: '${type.name} glass selected',
+                  type: ToastType.info,
+                );
+              },
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    _getTypeIcon(type),
+                    color: Colors.white,
+                    size: 24.sp,
+                  ),
+                  SizedBox(height: 8.h),
+                  Text(
+                    type.name,
+                    style: AppTextThemes.bodyMedium(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w600,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ],
+              ),
+            );
+          },
+        ),
+      ],
+    );
+  }
+
+  Widget _buildShapeExamples() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Glass Shapes',
+          style: AppTextThemes.heading5(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        SizedBox(height: 16.h),
+        Row(
+          children: [
+            Expanded(
+              child: GlassContainer(
+                type: GlassType.crystal,
+                shape: GlassShape.rectangle,
+                height: 80.h,
+                onTap: () =>
+                    setState(() => _selectedShape = GlassShape.rectangle),
+                child: Center(
+                  child: Text(
+                    'Rectangle',
+                    style: AppTextThemes.bodyMedium(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(width: 12.w),
+            Expanded(
+              child: GlassContainer(
+                type: GlassType.crystal,
+                shape: GlassShape.roundedRectangle,
+                height: 80.h,
+                radius: 20.r,
+                onTap: () => setState(
+                    () => _selectedShape = GlassShape.roundedRectangle),
+                child: Center(
+                  child: Text(
+                    'Rounded',
+                    style: AppTextThemes.bodyMedium(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            SizedBox(width: 12.w),
+            GlassContainer(
+              type: GlassType.crystal,
+              shape: GlassShape.circle,
+              width: 80.w,
+              height: 80.h,
+              onTap: () => setState(() => _selectedShape = GlassShape.circle),
+              child: Center(
+                child: Text(
+                  'Circle',
+                  style: AppTextThemes.bodySmall(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w600,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget _buildInteractiveExamples() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Interactive Elements',
+          style: AppTextThemes.heading5(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        SizedBox(height: 16.h),
+
+        // Glass Buttons
+        Row(
+          children: [
+            Expanded(
+              child: GlassContainer.button(
+                type: GlassType.crystal,
+                onTap: () => Toast.show(
+                  message: 'Crystal button tapped!',
+                  type: ToastType.success,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.favorite, color: Colors.white, size: 16.sp),
+                    SizedBox(width: 8.w),
+                    Text(
+                      'Like',
+                      style: AppTextThemes.button(color: Colors.white),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            SizedBox(width: 12.w),
+            Expanded(
+              child: GlassContainer.button(
+                type: GlassType.vibrant,
+                onTap: () => Toast.show(
+                  message: 'Vibrant button tapped!',
+                  type: ToastType.info,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.share, color: Colors.white, size: 16.sp),
+                    SizedBox(width: 8.w),
+                    Text(
+                      'Share',
+                      style: AppTextThemes.button(color: Colors.white),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+
+        SizedBox(height: 16.h),
+
+        // Glass Card with content
+        GlassContainer.card(
+          type: GlassType.frosted,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Container(
+                    width: 40.w,
+                    height: 40.w,
+                    decoration: BoxDecoration(
+                      color: Colors.white.withOpacity(0.2),
+                      shape: BoxShape.circle,
+                    ),
+                    child: Icon(
+                      Icons.person,
+                      color: Colors.white,
+                      size: 20.sp,
+                    ),
+                  ),
+                  SizedBox(width: 12.w),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'John Doe',
+                          style: AppTextThemes.bodyLarge(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Text(
+                          'Software Developer',
+                          style: AppTextThemes.bodySmall(
+                            color: Colors.white70,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  GlassContainer.button(
+                    type: GlassType.minimal,
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
+                    onTap: () => Toast.show(
+                      message: 'Follow button tapped!',
+                      type: ToastType.success,
+                    ),
+                    child: Text(
+                      'Follow',
+                      style: AppTextThemes.bodySmall(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 12.h),
+              Text(
+                'Building beautiful glass morphism effects with Flutter. The future of UI design is here! ✨',
+                style: AppTextThemes.bodyMedium(color: Colors.white),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildAdvancedExamples() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Advanced Examples',
+          style: AppTextThemes.heading5(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        SizedBox(height: 16.h),
+
+        // Nested Glass Containers
+        GlassContainer(
+          type: GlassType.smoky,
+          padding: EdgeInsets.all(20.w),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Nested Glass Effects',
+                style: AppTextThemes.bodyLarge(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              SizedBox(height: 12.h),
+              GlassContainer(
+                type: GlassType.crystal,
+                padding: EdgeInsets.all(16.w),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Inner Glass Container',
+                      style: AppTextThemes.bodyMedium(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    SizedBox(height: 8.h),
+                    Text(
+                      'Multiple layers create depth and visual interest.',
+                      style: AppTextThemes.bodySmall(color: Colors.white70),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+
+        SizedBox(height: 16.h),
+
+        // Glass with Gradient Overlay
+        GlassContainer(
+          type: GlassType.custom,
+          backgroundColor: Colors.transparent,
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [
+              Colors.purple.withOpacity(0.3),
+              Colors.blue.withOpacity(0.2),
+              Colors.cyan.withOpacity(0.1),
+            ],
+          ),
+          gradientOpacity: 0.8,
+          padding: EdgeInsets.all(16.w),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  Icon(Icons.color_lens, color: Colors.white, size: 20.sp),
+                  SizedBox(width: 8.w),
+                  Text(
+                    'Gradient Glass',
+                    style: AppTextThemes.bodyLarge(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 8.h),
+              Text(
+                'Glass containers can have gradient overlays for more dynamic effects.',
+                style: AppTextThemes.bodyMedium(color: Colors.white),
+              ),
+            ],
+          ),
+        ),
+
+        SizedBox(height: 16.h),
+
+        // Custom Shaped Glass
+        Row(
+          children: [
+            Expanded(
+              child: GlassContainer(
+                type: GlassType.crystal,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(30.r),
+                  bottomRight: Radius.circular(30.r),
+                ),
+                padding: EdgeInsets.all(16.w),
+                child: Text(
+                  'Custom\nBorder Radius',
+                  style: AppTextThemes.bodyMedium(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w600,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ),
+            SizedBox(width: 12.w),
+            Expanded(
+              child: GlassContainer(
+                type: GlassType.vibrant,
+                transform: Matrix4.rotationZ(0.1),
+                padding: EdgeInsets.all(16.w),
+                child: Text(
+                  'Rotated\nGlass',
+                  style: AppTextThemes.bodyMedium(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w600,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget _buildRealWorldExamples() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Real-World Applications',
+          style: AppTextThemes.heading5(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        SizedBox(height: 16.h),
+
+        // Music Player Card
+        GlassContainer.card(
+          type: GlassType.frosted,
+          child: Column(
+            children: [
+              Row(
+                children: [
+                  Container(
+                    width: 60.w,
+                    height: 60.w,
+                    decoration: BoxDecoration(
+                      color: Colors.white.withOpacity(0.2),
+                      borderRadius: BorderRadius.circular(8.r),
+                    ),
+                    child: Icon(
+                      Icons.music_note,
+                      color: Colors.white,
+                      size: 24.sp,
+                    ),
+                  ),
+                  SizedBox(width: 12.w),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Glass Morphism Beat',
+                          style: AppTextThemes.bodyMedium(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Text(
+                          'UI Design Studio',
+                          style: AppTextThemes.bodySmall(
+                            color: Colors.white70,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(height: 16.h),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  _buildGlassIconButton(Icons.skip_previous, () {}),
+                  _buildGlassIconButton(Icons.play_arrow, () {}),
+                  _buildGlassIconButton(Icons.skip_next, () {}),
+                  _buildGlassIconButton(Icons.favorite_border, () {}),
+                ],
+              ),
+            ],
+          ),
+        ),
+
+        SizedBox(height: 16.h),
+
+        // Weather Card
+        GlassContainer.card(
+          type: GlassType.crystal,
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'San Francisco',
+                        style: AppTextThemes.bodyLarge(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Text(
+                        'Partly Cloudy',
+                        style: AppTextThemes.bodySmall(
+                          color: Colors.white70,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Text(
+                        '72°',
+                        style: AppTextThemes.heading4(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Icon(
+                        Icons.wb_cloudy,
+                        color: Colors.white,
+                        size: 24.sp,
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+              SizedBox(height: 16.h),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  _buildWeatherStat('Humidity', '65%'),
+                  _buildWeatherStat('Wind', '12 mph'),
+                  _buildWeatherStat('UV Index', '3'),
+                  _buildWeatherStat('Visibility', '10 mi'),
+                ],
+              ),
+            ],
+          ),
+        ),
+
+        SizedBox(height: 16.h),
+
+        // Navigation Card
+        GlassContainer.card(
+          type: GlassType.vibrant,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Glass Navigation',
+                style: AppTextThemes.bodyLarge(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              SizedBox(height: 16.h),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  _buildNavItem(Icons.home, 'Home', true),
+                  _buildNavItem(Icons.search, 'Search', false),
+                  _buildNavItem(Icons.favorite, 'Likes', false),
+                  _buildNavItem(Icons.person, 'Profile', false),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildGlassIconButton(IconData icon, VoidCallback onTap) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        width: 40.w,
+        height: 40.w,
+        decoration: BoxDecoration(
+          color: Colors.white.withOpacity(0.2),
+          shape: BoxShape.circle,
+          border: Border.all(
+            color: Colors.white.withOpacity(0.3),
+            width: 1,
+          ),
+        ),
+        child: Icon(
+          icon,
+          color: Colors.white,
+          size: 20.sp,
+        ),
+      ),
+    );
+  }
+
+  Widget _buildWeatherStat(String label, String value) {
+    return Column(
+      children: [
+        Text(
+          value,
+          style: AppTextThemes.bodyMedium(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        Text(
+          label,
+          style: AppTextThemes.caption(
+            color: Colors.white70,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildNavItem(IconData icon, String label, bool isActive) {
+    return Column(
+      children: [
+        Container(
+          padding: EdgeInsets.all(8.w),
+          decoration: BoxDecoration(
+            color:
+                isActive ? Colors.white.withOpacity(0.3) : Colors.transparent,
+            borderRadius: BorderRadius.circular(12.r),
+          ),
+          child: Icon(
+            icon,
+            color: Colors.white,
+            size: 20.sp,
+          ),
+        ),
+        SizedBox(height: 4.h),
+        Text(
+          label,
+          style: AppTextThemes.caption(
+            color: isActive ? Colors.white : Colors.white70,
+            fontWeight: isActive ? FontWeight.bold : FontWeight.normal,
+          ),
+        ),
+      ],
+    );
+  }
+
+  IconData _getTypeIcon(GlassType type) {
+    switch (type) {
+      case GlassType.frosted:
+        return Icons.blur_on;
+      case GlassType.crystal:
+        return Icons.diamond_outlined;
+      case GlassType.smoky:
+        return Icons.cloud;
+      case GlassType.vibrant:
+        return Icons.color_lens;
+      case GlassType.minimal:
+        return Icons.minimize;
+      case GlassType.custom:
+        return Icons.tune;
+    }
+  }
+
+  void _showInfoDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      barrierColor: Colors.black.withOpacity(0.3),
+      builder: (context) => Center(
+        child: GlassContainer.dialog(
+          width: 300.w,
+          type: GlassType.frosted,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(
+                Icons.info_outline,
+                color: Colors.white,
+                size: 32.sp,
+              ),
+              SizedBox(height: 16.h),
+              Text(
+                'Glass Morphism',
+                style: AppTextThemes.heading5(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              SizedBox(height: 12.h),
+              Text(
+                'Glass morphism is a design trend that creates frosted glass effects with backdrop blur, transparency, and subtle borders.',
+                style: AppTextThemes.bodyMedium(color: Colors.white),
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(height: 24.h),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  GlassContainer.button(
+                    type: GlassType.minimal,
+                    onTap: () => Navigator.pop(context),
+                    child: Text(
+                      'Got it',
+                      style: AppTextThemes.button(color: Colors.white),
+                    ),
+                  ),
+                  GlassContainer.button(
+                    type: GlassType.crystal,
+                    onTap: () {
+                      Navigator.pop(context);
+                      _showCodeExample(context);
+                    },
+                    child: Text(
+                      'Show Code',
+                      style: AppTextThemes.button(color: Colors.white),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  void _showCodeExample(BuildContext context) {
+    showDialog(
+      context: context,
+      barrierColor: Colors.black.withOpacity(0.3),
+      builder: (context) => Center(
+        child: GlassContainer.dialog(
+          width: 350.w,
+          height: 500.h,
+          type: GlassType.smoky,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Code Example',
+                    style: AppTextThemes.heading6(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  IconButton(
+                    icon: Icon(Icons.close, color: Colors.white),
+                    onPressed: () => Navigator.pop(context),
+                  ),
+                ],
+              ),
+              SizedBox(height: 16.h),
+              Expanded(
+                child: Container(
+                  padding: EdgeInsets.all(12.w),
+                  decoration: BoxDecoration(
+                    color: Colors.black.withOpacity(0.3),
+                    borderRadius: BorderRadius.circular(8.r),
+                    border: Border.all(
+                      color: Colors.white.withOpacity(0.2),
+                    ),
+                  ),
+                  child: SingleChildScrollView(
+                    child: Text(
+                      '''GlassContainer(
+                    type: GlassType.frosted,
+                    shape: GlassShape.roundedRectangle,
+                    blurIntensity: 15.0,
+                    backgroundOpacity: 0.2,
+                    borderOpacity: 0.3,
+                    addShadow: true,
+                    padding: EdgeInsets.all(16),
+                    child: Column(
+                      children: [
+                        Text(
+                          'Glass Morphism',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        SizedBox(height: 8),
+                        Text(
+                          'Beautiful frosted glass effect',
+                          style: TextStyle(
+                            color: Colors.white70,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  // Convenience constructors:
+                  GlassContainer.card(
+                    child: YourWidget(),
+                  ),
+
+                  GlassContainer.button(
+                    onTap: () => print('Tapped!'),
+                    child: Text('Glass Button'),
+                  ),
+
+                  GlassContainer.dialog(
+                    child: YourDialogContent(),
+                  ),''',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 12.sp,
+                        fontFamily: 'monospace',
+                        height: 1.4,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              SizedBox(height: 16.h),
+              Center(
+                child: GlassContainer.button(
+                  type: GlassType.crystal,
+                  onTap: () {
+                    // In a real app, you might copy to clipboard
+                    Toast.show(
+                      message: 'Code copied to clipboard!',
+                      type: ToastType.success,
+                    );
+                  },
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(Icons.copy, color: Colors.white, size: 16.sp),
+                      SizedBox(width: 8.w),
+                      Text(
+                        'Copy Code',
+                        style: AppTextThemes.button(color: Colors.white),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+// Extension to capitalize first letter
+extension StringExtension on String {
+  String? get capitalize {
+    if (isEmpty) return null;
+    return "${this[0].toUpperCase()}${substring(1)}";
   }
 }
